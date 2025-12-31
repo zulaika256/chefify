@@ -1,0 +1,101 @@
+/* Background Section */
+.landing-bg {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('img/wallpaper1.jpg') no-repeat center center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* Strong peach overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 170, 150, 0.45);
+  z-index: 1;
+}
+
+/* Content Section */
+.content {
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1.2s ease-in;
+  color: #4b2e19; /* BROWN TEXT */
+}
+
+.floating { animation: float 3s ease-in-out infinite; }
+.floating-slow { animation: float 4.5s ease-in-out infinite; }
+
+.fade-in {
+  animation: fadeIn 1.5s ease-in forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+/* Logo Styling */
+#logo {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 2px solid #ffdde0;
+  box-shadow: 0 4px 12px rgba(100, 40, 20, 0.4);
+  transition: transform 0.3s ease;
+}
+
+#logo:hover { transform: scale(1.05); }
+
+/* Buttons */
+.btn-primary {
+  background-color: #ed6442;
+  border-color:   #ff9e85;
+  color: #4b2e19; /* brown text */
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #ff6f8a;
+  border-color:   #ff6f8a;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 120, 150, 0.55);
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Typography (ALL BROWN) */
+h1 { font-size: 3rem; color: #4b2e19; }
+h3 { font-size: 1.8rem; color: #4b2e19; }
+p  { font-size: 1.1rem; color: #4b2e19; }
+
+/* Responsive */
+@media (max-width: 576px) {
+  h1 { font-size: 2rem; }
+  h3 { font-size: 1.3rem; }
+  p  { font-size: 1rem; }
+  .btn-lg { font-size: 0.95rem; padding: 0.6rem 2rem; }
+  #logo { width: 100px; height: 100px; }
+}
+
+/* Footer */
+.footer {
+  background-color: #4a1f0f;
+  color: #ffccb5;
+  font-size: 0.9rem;
+}

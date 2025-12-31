@@ -1,0 +1,92 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+    background: #f8f9fa; /* Light grey so the cards pop */
+    padding: 40px 20px;
+}
+
+.rewards-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Header Section */
+.rewards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.rewards-header h1 { font-size: 24px; color: #2d3436; }
+.rewards-header p { color: #636e72; font-size: 14px; }
+
+.points-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #A0868C; /* Your Theme Color */
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: white;
+}
+
+.points-display i { font-size: 24px; color: #ffd700; }
+.count { display: block; font-size: 20px; font-weight: bold; }
+.label { font-size: 11px; opacity: 0.8; text-transform: uppercase; }
+
+/* Grid of Reward Cards */
+.rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.reward-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.reward-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: #A0868C;
+}
+
+.reward-card.highlight {
+    border: 2px solid #A0868C;
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.card-body h3 { font-size: 18px; margin-bottom: 10px; color: #2d3436; }
+.card-body p { font-size: 13px; color: #636e72; line-height: 1.5; margin-bottom: 20px; }
+
+.btn-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: #A0868C;
+}
+
+@media (max-width: 600px) {
+    .rewards-header { flex-direction: column; text-align: center; gap: 20px; }
+}
