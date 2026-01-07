@@ -634,10 +634,19 @@ footer::before{
       <span class="logo-text">Chefify</span>
     </a>
     <div class="nav-links" role="menu" aria-label="Main links">
-      <a href="homepage.php" class="active">Home</a>
+      <a href="homepage.php">Home</a>
       <a href="menu.php">Menu</a>
       <a href="cart.php">Cart</a>
-      <a href="dashboard.php">Dashboard</a>
+
+      <div class="nav-dropdown">
+        <a>Dashboard ▾</a>
+        <div class="dropdown-menu">
+          <a href="orders.php">Orders</a>
+          <a href="admin_menu.php">Menu Inventory</a>
+          <a href="customers.php">Customers</a>
+        </div>
+      </div>
+
       <a href="locations.php">Locations</a>
       <a href="aboutus.php">About Us</a>
       <a href="contactus.php">Contact Us</a>
