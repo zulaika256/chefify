@@ -26,6 +26,7 @@
         <a href="aboutus.php" >About</a>
         <a href="contactus.php" >Contact Us</a>
         <a href="feedback.php" >Feedback</a>
+        <a href="profile.php" >Profile</a>
         <a href="login.php">Logout</a>
       </div>
   </div>
@@ -231,4 +232,5 @@ badgeGrid.innerHTML = badges.map(b => `
 </script>
 
 </body>
+
 </html>
