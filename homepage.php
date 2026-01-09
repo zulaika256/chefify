@@ -32,6 +32,64 @@ body::before{
 }
 
 /* ================= NAV ================= */
+
+/* ================= DROPDOWN FIX ================= */
+.nav-dropdown {
+  position: relative; /* Wajib ada supaya menu anak boleh duduk di bawahnya */
+}
+
+.nav-dropdown > a {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute; /* Supaya dia terapung di atas content lain */
+  top: 100%; /* Muncul tepat di bawah link Dashboard */
+  left: 0;
+  background-color: white;
+  min-width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  display: none; /* Sembunyi secara default */
+  z-index: 1000;
+  padding: 0.5rem 0;
+  overflow: hidden;
+}
+
+/* Tunjukkan menu bila mouse hover pada parent */
+.nav-dropdown:hover .dropdown-menu {
+  display: block;
+  animation: fadeInDown 0.3s ease;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.7rem 1.2rem !important; /* Gunakan padding sendiri */
+  color: var(--chef-brown) !important;
+  border-radius: 0 !important; /* Buang border radius oval asal */
+  font-size: 0.9rem;
+  transition: background 0.2s;
+  text-align: left;
+}
+
+.dropdown-menu a:hover {
+  background: var(--peach-1) !important;
+  color: var(--chef-brown) !important;
+  transform: none !important; /* Buang effect gerak ke atas */
+}
+
+/* Animasi supaya nampak smooth */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 nav{
   position:sticky;
   top:0;
@@ -641,7 +699,8 @@ footer::before{
       <div class="nav-dropdown">
         <a>Dashboard ▾</a>
         <div class="dropdown-menu">
-          <a href="orders.php">Orders</a>
+          <a href ="dashboard-admin.php">Admin Dashboard</a>
+          <a href="orders.php">Manage Orders</a>
           <a href="admin_menu.php">Menu Inventory</a>
           <a href="customers.php">Customers</a>
         </div>
