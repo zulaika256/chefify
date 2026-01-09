@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menu - Chefify</title>
   <link rel="icon" href="img/chefify.jpg" type="image/png" />
-  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="menu.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
