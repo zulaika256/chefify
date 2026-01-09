@@ -22,7 +22,7 @@
 body{
   font-family:Arial, Helvetica, sans-serif;
   color:var(--chef-brown);
-  background:url('img/wallpaper4.jpg') no-repeat center center fixed;
+  background:url('img/wallpaper1.jpg') no-repeat center center fixed;
   background-size:cover;
   min-height:100vh;
 }
@@ -685,8 +685,14 @@ function placeOrder(){
   receipt += `Payment: ${payment.value}\n\n`;
   receipt += "Thank you for ordering with Chefify ❤️";
 
-  receiptText.innerText = receipt;
-  receiptModal.style.display = "flex";
+// Play confirmation sound
+const sound = document.getElementById("orderSound");
+sound.currentTime = 0;
+sound.play();
+
+// Show receipt
+receiptText.innerText = receipt;
+receiptModal.style.display = "flex";
 
   // Clear cart
   localStorage.removeItem("chefifyCart");
@@ -700,5 +706,8 @@ function closeModal(){
 
 renderCart();
 </script>
+
+<audio id="orderSound" src="img/Ding - Sound Effect (HD).mp3" preload="auto"></audio>
+
 </body>
 </html>
