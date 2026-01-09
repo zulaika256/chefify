@@ -20,7 +20,7 @@
 
 body{
   font-family:Arial, Helvetica, sans-serif;
-  background:url('img/wallpaper4.jpg') no-repeat center/cover fixed;
+  background:url('img/wallpaper1.jpg') no-repeat center/cover fixed;
   color:var(--chef-brown);
 }
 
