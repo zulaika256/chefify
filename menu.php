@@ -26,6 +26,7 @@
         <a href="aboutus.php" >About Us</a>
         <a href="contactus.php" >Contact Us</a>
         <a href="feedback.php" >Feedback</a>
+        <a href="profile.php" >Profile</a>
         <a href="login.php">Logout</a>
       </div>
   </div>
