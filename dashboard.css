@@ -11,7 +11,7 @@
 
 body{
   font-family:Arial, Helvetica, sans-serif;
-  background:url('img/wallpaper4.jpg') no-repeat center/cover fixed;
+  background:url('img/wallpaper1.jpg') no-repeat center/cover fixed;
   min-height:100vh;
   color:var(--chef-brown);
 }
@@ -604,4 +604,5 @@ footer::before{
 .contact-text a:hover{
   color:#fff;
 }
+
 
