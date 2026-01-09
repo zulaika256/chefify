@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -215,6 +216,13 @@ nav{
   padding:1rem;
 }
 
+.card-link,
+.product-link{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+
 .signature-grid{
   max-width:1100px;
   margin:0 auto;
@@ -276,59 +284,6 @@ nav{
   color:#6b4a35;
 }
 
-/* ================= CUSTOMER FEEDBACK ================= */
-.feedback-box{
-  text-align:center;
-}
-
-.feedback-carousel{
-  position:relative;
-  max-width:700px;
-  margin:0 auto;
-}
-
-.feedback-item{
-  display:none;
-  font-size:1.05rem;
-  color:#5a3a26;
-}
-
-.feedback-item.active{
-  display:block;
-}
-
-.feedback-item p{
-  font-style:italic;
-  margin:1.2rem 0;
-}
-
-.feedback-item span{
-  font-weight:700;
-}
-
-.stars{
-  color:#ff9e85;
-  font-size:1.3rem;
-  letter-spacing:2px;
-}
-
-.fb-arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:none;
-  border:none;
-  font-size:2rem;
-  cursor:pointer;
-  color:var(--chef-brown);
-}
-
-.fb-arrow.left{ left:-40px; }
-.fb-arrow.right{ right:-40px; }
-
-.fb-arrow:hover{
-  color:var(--btn-peach-hover);
-}
 
 /* Teasers */
 .teasers{
@@ -667,7 +622,8 @@ footer::before{
   <div class="container">
     <h2>Our Signature</h2>
     <div class="signature-grid">
-      <div class="card">
+      <a href="menu.php" class="card-link">
+  <div class="card">
         <img src="img/redvelvet.jpg">
         <div class="overlay">
           <div class="overlay-content">
@@ -676,8 +632,10 @@ footer::before{
           </div>
         </div>
       </div>
+      </a>
 
-      <div class="card">
+      <a href="menu.php" class="card-link">
+  <div class="card">
         <img src="img/cremebrulee.jpg">
         <div class="overlay">
           <div class="overlay-content">
@@ -686,8 +644,10 @@ footer::before{
           </div>
         </div>
       </div>
+      </a>
 
-      <div class="card">
+      <a href="menu.php" class="card-link">
+  <div class="card">
         <img src="img/matchatiramisu.jpg">
         <div class="overlay">
           <div class="overlay-content">
@@ -698,6 +658,7 @@ footer::before{
       </div>
     </div>
   </div>
+  </a>
 </section>
 
 <!-- BEST SELLER -->
@@ -705,54 +666,33 @@ footer::before{
   <div class="container white-box">
     <h2>Best Seller</h2>
     <div class="grid-3">
-      <div class="product">
+      <a href="menu.php" class="product-link">
+  <div class="product">
         <img src="img/nasilemak.jpg">
         <h3>Nasi Lemak</h3>
         <p>Fragrant coconut rice with crispy chicken, sambal and egg.</p>
       </div>
-      <div class="product">
+      </a>
+
+      <a href="menu.php" class="product-link">
+  <div class="product">
         <img src="img/laksa.jpg">
         <h3>Laksa</h3>
         <p>Creamy coconut noodle soup with fish cake.</p>
       </div>
-      <div class="product">
+      </a>
+
+      <a href="menu.php" class="product-link">
+  <div class="product">
         <img src="img/pasta.jpg">
         <h3>Spaghetti Carbonara</h3>
         <p>Creamy carbonara with beef bacon and parmesan cheese.</p>
       </div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- CUSTOMER FEEDBACK -->
-<section class="section">
-  <div class="container white-box feedback-box">
-    <h2>What Our Customers Say</h2>
-    <div class="feedback-carousel">
-      <button class="fb-arrow left" onclick="prevFeedback()">&#10094;</button>
-
-      <div class="feedback-item active">
-        <div class="stars">★★★★★</div>
-        <p>"The Nasi Lemak is absolutely amazing! Best I've had in years."</p>
-        <span>- Aisyah R.</span>
-      </div>
-
-      <div class="feedback-item">
-        <div class="stars">★★★★★</div>
-        <p>"Fast delivery and the food arrived hot and delicious."</p>
-        <span>- Daniel K.</span>
-      </div>
-
-      <div class="feedback-item">
-        <div class="stars">★★★★☆</div>
-        <p>"Love the Carbonara! Creamy and very filling."</p>
-        <span>- Nur Izzati</span>
-      </div>
-
-      <button class="fb-arrow right" onclick="nextFeedback()">&#10095;</button>
-    </div>
-  </div>
-</section>
 
 <!-- Teasers -->
 <section class="teasers" aria-label="Highlights">
