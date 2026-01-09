@@ -222,15 +222,15 @@ tr:not(:last-child){ border-bottom:1px solid #eee; }
       <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
       <span class="logo-text">Chefify</span>
     </a>
-    <div class="nav-links" role="menu" aria-label="Main links">
+    <div class="nav-links">
       <a href="homepage.php">Home</a>
       <a href="menu.php">Menu</a>
       <a href="cart.php">Cart</a>
 
       <div class="nav-dropdown">
-        <a>Dashboard ▾</a>
+        <a class="active">Dashboard ▾</a>
         <div class="dropdown-menu">
-          <a href="orders.php">Orders</a>
+          <a href="orders.php">Manage Orders</a>
           <a href="admin_menu.php">Menu Inventory</a>
           <a href="customers.php">Customers</a>
         </div>
@@ -238,14 +238,17 @@ tr:not(:last-child){ border-bottom:1px solid #eee; }
 
       <a href="locations.php">Locations</a>
       <a href="aboutus.php">About Us</a>
-      <a href="contactus.php">Contact Us</a>
-      <a href="feedback.php">Feedback</a>
       <a href="login.php">Logout</a>
     </div>
   </div>
 </nav>
 
-<div class="header">   <h2>Manage Customers</h2>   <a href="homepage.php" style="text-decoration:none; color:var(--chef-brown); font-weight:600; background:var(--peach-1); padding:.5rem 1rem; border-radius:20px;">← Back to dashboard</a> </div>
+<div class="header"> 
+  <h2>Manage Customers</h2>  
+   <a href="dashboard-admin.php" 
+   style="text-decoration:none; color:var(--chef-brown);
+    font-weight:600; background:var(--peach-1); padding:.5rem 1rem; 
+    border-radius:20px;">← Back to dashboard</a> </div>
 
 
 <div class="container">
@@ -405,6 +408,7 @@ renderAll();
 </script>
 </body>
 </html>
+
 
 
 
