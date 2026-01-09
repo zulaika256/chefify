@@ -93,19 +93,52 @@ nav{
 }
 .filter-btn.active, .filter-btn:hover { background: var(--peach-2); color: white; }
 
-.container{ 
-  max-width:1200px; margin:1rem auto 4rem; padding:0 1.5rem; 
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; 
+/* ================= GRID & CARDS (DIKEMASKINI) ================= */
+.container { 
+  max-width: 1200px; 
+  margin: 1rem auto 4rem; 
+  padding: 0 1.5rem; 
+  display: grid; 
+  /* Kita besarkan minmax dari 280px ke 350px supaya kad lebih lebar */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+  gap: 25px; 
 }
-.menu-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08); transition: 0.3s; }
-.item-img { width: 100%; height: 180px; object-fit: cover; }
-.item-content { padding: 1.2rem; }
+
+.menu-card { 
+  background: white; 
+  border-radius: 25px; /* Bulatkan lagi sikit bucu kad */
+  overflow: hidden; 
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+  transition: 0.3s; 
+}
+
+.item-img { 
+  width: 100%; 
+  /* Kita tinggikan gambar dari 180px ke 250px */
+  height: 250px; 
+  object-fit: cover; 
+}
+
+.item-content { 
+  padding: 1.5rem; /* Tambah ruang dalam sikit */
+}
+
+/* Besarkan sikit saiz tulisan nama makanan & harga */
+.item-content h3 { font-size: 1.3rem; }
+.item-content p { font-size: 1.4rem; color: var(--chef-brown); }
 
 /* ADMIN ACTIONS */
-.admin-actions { display: flex; gap: 8px; margin-top: 12px; }
+.admin-actions { display: flex; gap: 12px; margin-top: 15px; }
 .action-box { 
-  flex: 1; border: none; padding: 8px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 0.8rem;
+  flex: 1; border: none; 
+  padding: 12px; /* Tebalkan butang */
+  border-radius: 12px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  transition: 0.3s; 
+  font-size: 0.9rem; 
 }
+
 .edit-btn { background: #f2f2f2; color: #555; }
 .promo-btn { background: var(--peach-1); color: var(--chef-brown); }
 
@@ -134,20 +167,20 @@ nav{
     </a>
     <div class="nav-links">
       <a href="homepage.php">Home</a>
-      <a href="menu.php" class="active">Menu</a>
+      <a href="menu.php">Menu</a>
       <a href="cart.php">Cart</a>
+
       <div class="nav-dropdown">
-        <a>Dashboard ▾</a>
+        <a class="active">Dashboard ▾</a>
         <div class="dropdown-menu">
-          <a href="orders.php">Orders</a>
-          <a href="admin_menu.php">Menu</a>
+          <a href="orders.php">Manage Orders</a>
+          <a href="admin_menu.php">Menu Inventory</a>
           <a href="customers.php">Customers</a>
         </div>
       </div>
+
       <a href="locations.php">Locations</a>
       <a href="aboutus.php">About Us</a>
-      <a href="contactus.php">Contact Us</a>
-      <a href="feedback.php">Feedback</a>
       <a href="login.php">Logout</a>
     </div>
   </div>
@@ -156,7 +189,7 @@ nav{
 <div class="header">
   <h2><i class="fa-solid fa-bars-progress header-icon"></i> Menu Inventory</h2>
   <div class="header-right">
-    <a href="homepage.php" class="back-btn">← Back to Dashboard</a>
+    <a href="dashboard-admin.php" class="back-btn">← Back to Dashboard</a>
     <button class="add-btn-main" onclick="showModal('addModal')">+ Add New Item</button>
   </div>
 </div>
