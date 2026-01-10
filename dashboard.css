@@ -379,7 +379,7 @@ nav{
   transform:translateX(5px);
 }
 
-//* ============== FOOTER ============== */
+/* ============== FOOTER ============== */
 footer{
   background:linear-gradient(135deg, var(--chef-brown) 0%, #5d3a23 100%);
   color:#ffdccf;
