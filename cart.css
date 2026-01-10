@@ -258,7 +258,7 @@ footer::before{
 
 .footer-top{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns:1.5fr 1fr;
   gap:3rem;
   padding:2rem 0 3rem;
   border-bottom:1px solid rgba(255,220,207,0.2);
@@ -324,14 +324,13 @@ footer::before{
 }
 
 .social-icon img{
-  width:24px;
-  height:24px;
-  filter:brightness(0) invert(1);
-  transition:filter .3s ease;
+  width:28px;
+  height:28px;
+  object-fit:contain;
 }
 
 .social-icon:hover img{
-  filter:none;
+  transform:scale(1.1);
 }
 
 .footer-section h3{
@@ -413,37 +412,7 @@ footer::before{
   color:#fff;
 }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:968px){
-  .hero{
-    height:70vh;
-  }
 
-  .hero-content{
-    margin:0 auto;
-    padding:0 1.5rem;
-    text-align:center;
-  }
-  
-  .nav-links{
-    display:none;
-  }
-  
-  .footer-top{
-    grid-template-columns:1fr;
-    gap:2.5rem;
-  }
-}
-
-@media(max-width:900px){
-  .signature-grid{
-    grid-template-columns:1fr;
-  }
-  
-  .teasers-grid{
-    grid-template-columns:1fr;
-  }
-}
 
 @media(max-width:640px){
   .footer-bottom{
