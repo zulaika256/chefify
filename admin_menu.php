@@ -6,193 +6,39 @@
 <title>Menu Management | Chefify Admin</title>
 <link rel="icon" href="img/chefify.jpg" type="image/png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<style>
-:root{
-  --chef-brown:#4b2e19;
-  --peach-1:#ffd6c8;
-  --peach-2:#ffb7a1;
-  --btn-peach:#ff9e85;
-  --btn-peach-hover:#ff6f8a;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:'Arial', Helvetica, sans-serif;
-  background:url('img/wallpaper4.jpg') no-repeat center/cover fixed;
-  color:var(--chef-brown);
-}
-
-body::before{
-  content:""; position:fixed; inset:0;
-  background:rgba(255,170,150,.45); z-index:-1;
-}
-
-/* ================= NAV (KEKAL FORMAT ASAL) ================= */
-nav{
-  position:sticky; top:0; z-index:999; background: transparent; padding: 1rem 0; backdrop-filter: blur(4px);
-}
-.nav-container{
-  max-width:1200px; margin:0 auto; padding: 0 1rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;
-}
-.logo{ display:flex; align-items:center; gap:18px; text-decoration:none; }
-.logo-img{ height:60px; width:auto; border-radius:50%; border:2px solid #ffdde0; box-shadow:0 4px 12px rgba(100,40,20,0.35); }
-.logo-text{ font-size:1.6rem; font-weight:800; color:var(--chef-brown); letter-spacing:0.5px; }
-
-.nav-links{ display:flex; gap:0.35rem; align-items:center; }
-.nav-links a{ color:var(--chef-brown); text-decoration:none; padding:0.45rem 0.9rem; border-radius:20px; font-weight:600; transition:all .22s ease; }
-.nav-links a:hover, .nav-links a.active{ color:white; background: linear-gradient(45deg,var(--peach-1),var(--peach-2)); box-shadow: 0 6px 18px rgba(255,150,130,0.18); transform:translateY(-3px); }
-
-.nav-dropdown{ position:relative; }
-.dropdown-menu{
-  position:absolute; top:100%; left:0; background:white; min-width:180px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.2); display:none; z-index:999;
-}
-.nav-dropdown:hover .dropdown-menu{ display:block; }
-.dropdown-menu a{ display:block; padding:0.8rem 1.2rem; color:var(--chef-brown); text-decoration:none; font-weight:600; }
-.dropdown-menu a:hover{ background:linear-gradient(45deg,var(--peach-1),var(--peach-2)); color:white; }
-
-/* ================= HEADER (DIPERKECILKAN IKUT PAGE ORDER) ================= */
-.header{
-  max-width:1200px;
-  margin:4rem auto 2rem;
-  padding:1rem 1.5rem; /* Saiz padding yang sama mcm Manage Order */
-  background:#F4F4F4;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(75,46,25,0.2);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:1rem;
-}
-.header h2{ font-size:1.8rem; display:flex; align-items:center; gap:0.8rem; }
-.header-icon { font-size:1.6rem; color:var(--chef-brown); }
-
-.header-right { display: flex; align-items: center; gap: 0.8rem; }
-
-/* Back Link Style */
-.header a.back-btn{
-  text-decoration:none; color:var(--chef-brown); font-weight:600; background:var(--peach-1);
-  padding:.5rem 1rem; border-radius:20px; transition:all .3s ease; font-size: 0.9rem;
-}
-.header a.back-btn:hover{ background:var(--peach-2); color:white; }
-
-/* Add Button Style */
-.add-btn-main { 
-  background:var(--btn-peach); color:white; font-weight:800; 
-  padding:.5rem 1.2rem; /* Saiz diselaraskan supaya seimbang */
-  border-radius:20px; cursor:pointer; border:none; transition: 0.3s; font-size: 0.9rem;
-}
-.add-btn-main:hover { background: var(--btn-peach-hover); transform: translateY(-2px); }
-
-/* ================= FILTERS & GRID ================= */
-.filters{ max-width:1200px; margin:1rem auto; padding:0 1.5rem; display:flex; gap:0.8rem; flex-wrap:wrap; }
-.filter-btn { 
-  padding: 6px 15px; border-radius: 12px; border: 1.5px solid var(--peach-2); background: white; cursor: pointer; font-weight: 700; transition: 0.3s; font-size: 0.85rem;
-}
-.filter-btn.active, .filter-btn:hover { background: var(--peach-2); color: white; }
-
-/* ================= GRID & CARDS (DIKEMASKINI) ================= */
-.container { 
-  max-width: 1200px; 
-  margin: 1rem auto 4rem; 
-  padding: 0 1.5rem; 
-  display: grid; 
-  /* Kita besarkan minmax dari 280px ke 350px supaya kad lebih lebar */
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-  gap: 25px; 
-}
-
-.menu-card { 
-  background: white; 
-  border-radius: 25px; /* Bulatkan lagi sikit bucu kad */
-  overflow: hidden; 
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-  transition: 0.3s; 
-}
-
-.item-img { 
-  width: 100%; 
-  /* Kita tinggikan gambar dari 180px ke 250px */
-  height: 250px; 
-  object-fit: cover; 
-}
-
-.item-content { 
-  padding: 1.5rem; /* Tambah ruang dalam sikit */
-}
-
-/* Besarkan sikit saiz tulisan nama makanan & harga */
-.item-content h3 { font-size: 1.3rem; }
-.item-content p { font-size: 1.4rem; color: var(--chef-brown); }
-
-/* ADMIN ACTIONS */
-.admin-actions { display: flex; gap: 12px; margin-top: 15px; }
-.action-box { 
-  flex: 1; border: none; 
-  padding: 12px; /* Tebalkan butang */
-  border-radius: 12px; 
-  font-weight: 700; 
-  cursor: pointer; 
-  transition: 0.3s; 
-  font-size: 0.9rem; 
-}
-
-.edit-btn { background: #f2f2f2; color: #555; }
-.promo-btn { background: var(--peach-1); color: var(--chef-brown); }
-
-/* TOAST & MODAL */
-#toast { visibility: hidden; min-width: 200px; background-color: var(--chef-brown); color: #fff; text-align: center; border-radius: 50px; padding: 12px; position: fixed; z-index: 2000; left: 50%; bottom: 30px; transform: translateX(-50%); font-weight: 600; }
-#toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px); }
-.modal-box { background: white; width: 380px; padding: 25px; border-radius: 20px; }
-.form-group { margin-bottom: 12px; }
-.form-group label { display: block; font-weight: 700; margin-bottom: 5px; font-size: 0.9rem; }
-.form-group input, .form-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ddd; }
-
-@keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-@keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
-</style>
-</head>
-<body>
-
-<div id="toast">Successful!</div>
+<link rel="stylesheet" href="css/admin_menu.css">
 
 <nav>
-  <div class="nav-container">
-    <a href="homepage.php" class="logo">
-      <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
-      <span class="logo-text">Chefify</span>
-    </a>
-    <div class="nav-links">
-      <a href="homepage.php">Home</a>
-      <a href="menu.php">Menu</a>
-      <a href="cart.php">Cart</a>
-
-      <div class="nav-dropdown">
-        <a class="active">Dashboard ▾</a>
-        <div class="dropdown-menu">
-          <a href="admin_order.php">Manage Orders</a>
-          <a href="admin_menu.php">Menu Inventory</a>
-          <a href="admin_customers.php">Customers</a>
+    <div class="nav-container">
+        <a href="homepage.php" class="logo">
+            <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
+            <span class="logo-text">Chefify</span>
+        </a>
+        <div class="nav-links">
+            <div class="nav-dropdown">
+                <a class="active">Dashboard ▾</a>
+                <div class="dropdown-menu">
+                    <a href="admin_order.php">Manage Orders</a>
+                    <a href="admin_menu.php">Menu Inventory</a>
+                    <a href="admin_customers.php">Customers</a>
+                </div>
+            </div>
+            <a href="admin_feedback.php">Feedback</a>
+            <a href="profile.php">Profile</a>
+            <a href="login.php">Logout</a>
         </div>
-      </div>
-
-      <a href="locations.php">Locations</a>
-      <a href="aboutus.php">About Us</a>
-      <a href="login.php">Logout</a>
     </div>
-  </div>
 </nav>
 
 <div class="header">
-  <h2><i class="fa-solid fa-bars-progress header-icon"></i> Menu Inventory</h2>
+  <h2><i class="fa-solid fa-truck-fast"></i> Menu Inventory</h2>
   <div class="header-right">
     <a href="admin_dashboard.php" class="back-btn">← Back to Dashboard</a>
     <button class="add-btn-main" onclick="showModal('addModal')">+ Add New Item</button>
   </div>
 </div>
+
+<div id="toast">Successful!</div>
 
 <div class="filters">
   <button class="filter-btn active" onclick="filterCat('all', this)">All Items</button>
@@ -256,6 +102,7 @@ nav{
     </div>
   </div>
 </div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-container">
@@ -329,7 +176,48 @@ nav{
 
 <script>
 let menuData = [
-  {id:1, name:"Chicken Chop", price:18.00, promo:null, date:"", cat:"western", img:"img/chefify.jpg"}
+  // WESTERN
+  { id: 1, name: "Grilled Chicken Chop", cat: "western", price: 18.90, promo: null, date: "", img: "img/grilledchicken.jpg" },
+  { id: 2, name: "Fish & Chips", cat: "western", price: 21.00, promo: null, date: "", img: "img/fishandchips.jpg" },
+  { id: 3, name: "Spaghetti Carbonara", cat: "western", price: 19.50, promo: null, date: "", img: "img/pasta.jpg" },
+  { id: 4, name: "Spaghetti Bolognese", cat: "western", price: 18.50, promo: null, date: "", img: "img/bolognese.jpg" },
+  { id: 5, name: "Seafood Aglio Olio", cat: "western", price: 24.00, promo: null, date: "", img: "img/seafood.jpg" },
+  { id: 6, name: "Chicken Lasagna", cat: "western", price: 20.00, promo: null, date: "", img: "img/lasagna.jpg" },
+  { id: 7, name: "Beef Burger", cat: "western", price: 22.50, promo: null, date: "", img: "img/beefburger.jpg" },
+  { id: 8, name: "Avocado Toast", cat: "western", price: 19.50, promo: null, date: "", img: "img/avocadotoast.jpg" },
+
+  // LOCAL DISHES
+  { id: 9, name: "Nasi Lemak Ayam Crispy", cat: "local", price: 15.90, promo: null, date: "", img: "img/nasilemak.jpg" },
+  { id: 10, name: "Nasi Goreng Kampung", cat: "local", price: 13.90, promo: null, date: "", img: "img/nasigoreng.jpg" },
+  { id: 11, name: "Mee Goreng Mamak", cat: "local", price: 13.50, promo: null, date: "", img: "img/meegoreng.jpg" },
+  { id: 12, name: "Chicken Rendang Rice", cat: "local", price: 17.90, promo: null, date: "", img: "img/rendang.jpg" },
+  { id: 13, name: "Laksa Lemak", cat: "local", price: 16.50, promo: null, date: "", img: "img/laksa.jpg" },
+
+  // DESSERTS
+  { id: 14, name: "Chocolate Lava Cake", cat: "dessert", price: 12.50, promo: null, date: "", img: "img/lava.jpg" },
+  { id: 15, name: "Classic Cheesecake", cat: "dessert", price: 13.50, promo: null, date: "", img: "img/classiccheesecake.jpg" },
+  { id: 16, name: "Classic Tiramisu", cat: "dessert", price: 14.00, promo: null, date: "", img: "img/tiramisu.jpg" },
+  { id: 17, name: "Matcha Tiramisu", cat: "dessert", price: 14.50, promo: null, date: "", img: "img/matchatiramisu.jpg" },
+  { id: 18, name: "Brownies with Ice Cream", cat: "dessert", price: 11.90, promo: null, date: "", img: "img/browniesice.jpg" },
+  { id: 19, name: "Red Velvet Cake", cat: "dessert", price: 11.00, promo: null, date: "", img: "img/redvelvet.jpg" },
+  { id: 20, name: "Crème Brûlée", cat: "dessert", price: 13.00, promo: null, date: "", img: "img/cremebrulee.jpg" },
+
+  // DRINKS
+  { id: 21, name: "Hot Latte", cat: "drinks", price: 8.00, promo: null, date: "", img: "img/latte.jpg" },
+  { id: 22, name: "Cappuccino", cat: "drinks", price: 8.50, promo: null, date: "", img: "img/cappuccino.jpg" },
+  { id: 23, name: "Iced Latte", cat: "drinks", price: 9.00, promo: null, date: "", img: "img/icedlatte.jpg" },
+  { id: 24, name: "Matcha Latte", cat: "drinks", price: 9.00, promo: null, date: "", img: "img/matcha.jpg" },
+  { id: 25, name: "Iced Mocha", cat: "drinks", price: 9.50, promo: null, date: "", img: "img/mocha.jpg" },
+  { id: 26, name: "Lemon Iced Tea", cat: "drinks", price: 6.50, promo: null, date: "", img: "img/lemon.jpg" },
+  { id: 27, name: "Peach Tea", cat: "drinks", price: 7.00, promo: null, date: "", img: "img/peachtea.jpg" },
+  { id: 28, name: "Strawberry Frappe", cat: "drinks", price: 8.50, promo: null, date: "", img: "img/strawberryfrappe.jpg" },
+
+  // SNACKS
+  { id: 29, name: "French Fries", cat: "snacks", price: 6.90, promo: null, date: "", img: "img/frenchfries.jpg" },
+  { id: 30, name: "Cheesy Fries", cat: "snacks", price: 8.50, promo: null, date: "", img: "img/cheesyfries.jpg" },
+  { id: 31, name: "Chicken Nuggets", cat: "snacks", price: 8.50, promo: null, date: "", img: "img/nuggets.jpg" },
+  { id: 32, name: "Onion Rings", cat: "snacks", price: 7.50, promo: null, date: "", img: "img/onionrings.jpg" },
+  { id: 33, name: "Nachos with Cheese", cat: "snacks", price: 9.90, promo: null, date: "", img: "img/nachos.jpg" }
 ];
 
 function triggerToast(msg) {
@@ -345,7 +233,7 @@ function renderMenu(data = menuData) {
   data.forEach(item => {
     grid.innerHTML += `
       <div class="menu-card">
-        <img src="${item.img}" class="item-img" onerror="this.src='img/chefify.jpg'">
+        <img src="${item.img}" class="item-img"> 
         <div class="item-content">
           <h3 style="font-size:1.1rem">${item.name}</h3>
           <p style="font-weight:800; font-size:1.1rem; margin:8px 0;">
@@ -362,8 +250,6 @@ function renderMenu(data = menuData) {
   });
 }
 
-
-
 function showModal(id) { document.getElementById(id).style.display = 'flex'; }
 function hideModal(id) { document.getElementById(id).style.display = 'none'; }
 
@@ -373,7 +259,6 @@ function saveNewItem() {
   const cat = document.getElementById('newCat').value;
   const imgFile = document.getElementById('newImg').files[0];
   if(!name || !price) return;
-  let imgSrc = "img/chefify.jpg";
   if(imgFile) imgSrc = URL.createObjectURL(imgFile);
   menuData.push({ id: Date.now(), name, price, promo:null, date:"", cat, img: imgSrc });
   renderMenu();
@@ -412,6 +297,7 @@ function updateItem() {
 function filterCat(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  
   const filtered = (cat === 'all') ? menuData : menuData.filter(i => i.cat === cat);
   renderMenu(filtered);
 }
@@ -420,3 +306,4 @@ renderMenu();
 </script>
 </body>
 </html>
+
