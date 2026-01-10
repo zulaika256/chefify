@@ -92,27 +92,12 @@
         
         <div class="footer-social">
           <a href="https://www.tiktok.com/@chefifyapp?_r=1&_t=ZS-92RNDS9aRWs" target="_blank" rel="noopener" class="social-icon" title="Follow us on TikTok">
-            <img src="img/tiktoklogo.png" alt="TikTok" onerror="this.innerHTML='<span style=color:#fff>TT</span>'">
+            <img src="img/tiktok.png" alt="TikTok">
           </a>
           <a href="https://www.instagram.com/chefifyapp?igsh=Z3RhMW43dndoN281&utm_source=qr" target="_blank" rel="noopener" class="social-icon" title="Follow us on Instagram">
-            <img src="img/iglogo.png" alt="Instagram" onerror="this.innerHTML='<span style=color:#fff>IG</span>'">
-          </a>
-          <a href="https://facebook.com/chefify" target="_blank" rel="noopener" class="social-icon" title="Like us on Facebook">
-            <span style="font-size:1.5rem;">📘</span>
+            <img src="img/instagram.webp" alt="Instagram">
           </a>
         </div>
-      </div>
-      
-      <!-- Quick Links -->
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul class="footer-links">
-          <li><a href="homepage.php">Home</a></li>
-          <li><a href="menu.php">Menu</a></li>
-          <li><a href="aboutus.php">About Us</a></li>
-          <li><a href="locations.php">Locations</a></li>
-          <li><a href="contactus.php">Contact Us</a></li>
-        </ul>
       </div>
       
       <!-- Contact Info -->
