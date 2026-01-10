@@ -4,605 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Chefify</title>
-  <style>
-    :root {
-      --chef-brown: #64281a;
-      --peach-1: #ff9682;
-      --peach-2: #ffb4a8;
-      --cream: #fff5f0;
-      --light-peach: #ffdde0;
-    }
+  <link rel="icon" href="img/chefify.jpg" type="image/png" />
+  <link rel="stylesheet" href="css/contactus.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 100%);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Floating elements animation */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
-    }
-
-    @keyframes float-reverse {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(20px) rotate(-5deg); }
-    }
-
-    .bg-decoration {
-      position: fixed;
-      pointer-events: none;
-      opacity: 0.08;
-      z-index: 0;
-    }
-
-    .bg-decoration.circle1 {
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, var(--peach-1), transparent);
-      top: -100px;
-      right: -100px;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .bg-decoration.circle2 {
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, var(--peach-2), transparent);
-      bottom: 100px;
-      left: -50px;
-      animation: float-reverse 8s ease-in-out infinite;
-    }
-
-   
-/* ================= NAV ================= */
-   nav{
-      position:sticky;
-      top:0;
-      z-index:999;
-      background: transparent;
-      padding: 1.25rem 0;
-      backdrop-filter: blur(4px);
-    }
-
-    .nav-container{
-      max-width:1200px;
-      margin:0 auto;
-      padding: 0 1rem;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
-      z-index:2;
-    }
-
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:18px;
-      text-decoration:none;
-    }
-
-    .logo-img{
-      height:60px;
-      width:auto;
-      border-radius:50%;
-      border:2px solid #ffdde0;
-      box-shadow:0 4px 12px rgba(100,40,20,0.35);
-    }
-
-    .logo-text{
-      font-size:1.6rem;
-      font-weight:800;
-      color:var(--chef-brown);
-      letter-spacing:0.5px;
-    }
-
-    .nav-links{
-      display:flex;
-      gap:0.35rem;
-      align-items:center;
-    }
-
-    .nav-links a{
-      color:var(--chef-brown);
-      text-decoration:none;
-      padding:0.45rem 0.9rem;
-      border-radius:20px;
-      font-weight:600;
-      transition:all .22s ease;
-    }
-
-    .nav-links a:hover{
-      color:white;
-      background: linear-gradient(45deg,var(--peach-1),var(--peach-2));
-      box-shadow: 0 6px 18px rgba(255,150,130,0.18);
-      transform:translateY(-3px);
-    }
-
-    .nav-links a.active{
-      background: linear-gradient(45deg,var(--peach-1),var(--peach-2));
-      color:white;
-    }
-
-    /* ================= CONTACT PAGE ================= */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .contact-hero {
-      text-align: center;
-      padding: 5rem 1rem 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-hero h1 {
-      font-size: 4.5rem;
-      color: var(--chef-brown);
-      margin-bottom: 1rem;
-      font-weight: 900;
-      letter-spacing: -2px;
-      animation: fadeInUp 0.8s ease;
-    }
-
-    .contact-hero p {
-      font-size: 1.3rem;
-      color: #8b4c3a;
-      max-width: 700px;
-      margin: 0 auto;
-      animation: fadeInUp 0.8s ease 0.2s both;
-    }
-
-    .contact-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Main Contact Grid */
-    .contact-main-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      animation: fadeInUp 0.8s ease 0.3s both;
-    }
-
-    /* Contact Form */
-    .contact-form-section {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 240, 0.98));
-      border-radius: 32px;
-      padding: 3rem;
-      box-shadow: 0 20px 60px rgba(100, 40, 20, 0.15);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 221, 224, 0.5);
-      transition: all 0.5s ease;
-    }
-
-    .contact-form-section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 70px rgba(100, 40, 20, 0.2);
-    }
-
-    .section-title {
-      font-size: 2.2rem;
-      color: var(--chef-brown);
-      margin-bottom: 1.5rem;
-      font-weight: 800;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--chef-brown);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1rem 1.2rem;
-      border: 2px solid rgba(255, 150, 130, 0.2);
-      border-radius: 16px;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: all 0.3s ease;
-      background: white;
-      color: var(--chef-brown);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--peach-1);
-      box-shadow: 0 0 0 4px rgba(255, 150, 130, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 150px;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 1.2rem;
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      color: white;
-      border: none;
-      border-radius: 16px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 25px rgba(255, 150, 130, 0.3);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(255, 150, 130, 0.4);
-    }
-
-    .submit-btn:active {
-      transform: translateY(0);
-    }
-
-    /* Quick Contact Info */
-    .quick-contact-section {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 240, 0.98));
-      border-radius: 32px;
-      padding: 3rem;
-      box-shadow: 0 20px 60px rgba(100, 40, 20, 0.15);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 221, 224, 0.5);
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .quick-info-item {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 20px;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .quick-info-item:hover {
-      border-color: var(--peach-1);
-      transform: translateX(10px);
-      box-shadow: 0 8px 25px rgba(255, 150, 130, 0.2);
-    }
-
-    .quick-info-item h4 {
-      color: var(--peach-1);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.8rem;
-      font-weight: 700;
-    }
-
-    .quick-info-item p {
-      color: var(--chef-brown);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .quick-info-item a {
-      color: var(--chef-brown);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .quick-info-item a:hover {
-      color: var(--peach-1);
-    }
-
-    /* Social Media */
-    .social-section {
-      text-align: center;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .social-btn {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.8rem;
-      text-decoration: none;
-      transition: all 0.4s ease;
-      box-shadow: 0 8px 20px rgba(255, 150, 130, 0.3);
-    }
-
-    .social-btn:hover {
-      transform: translateY(-8px) scale(1.1);
-      box-shadow: 0 15px 40px rgba(255, 150, 130, 0.5);
-    }
-
-    /* Branch Contact Cards */
-    .branch-section {
-      animation: fadeInUp 0.8s ease 0.4s both;
-      margin-bottom: 3rem;
-    }
-
-    .branch-title {
-      font-size: 2.5rem;
-      color: var(--chef-brown);
-      margin-bottom: 2rem;
-      font-weight: 800;
-      text-align: center;
-    }
-
-    .branch-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    .branch-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 240, 0.98));
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: 0 15px 40px rgba(100, 40, 20, 0.12);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 221, 224, 0.5);
-      transition: all 0.4s ease;
-    }
-
-    .branch-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(100, 40, 20, 0.2);
-    }
-
-    .branch-name {
-      font-size: 1.5rem;
-      color: var(--chef-brown);
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-    }
-
-    .branch-tag {
-      display: inline-block;
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1.5rem;
-    }
-
-    .branch-info {
-      margin-top: 1rem;
-    }
-
-    .branch-info-item {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-      color: var(--chef-brown);
-      transition: all 0.3s ease;
-      padding: 0.5rem;
-      border-radius: 10px;
-    }
-
-    .branch-info-item:hover {
-      background: rgba(255, 150, 130, 0.1);
-      transform: translateX(5px);
-    }
-
-    .branch-icon {
-      font-size: 1.3rem;
-    }
-
-    .branch-info-item a {
-      color: var(--chef-brown);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .branch-info-item a:hover {
-      color: var(--peach-1);
-    }
-
-    /* Department Cards */
-    .department-section {
-      animation: fadeInUp 0.8s ease 0.5s both;
-      margin-bottom: 3rem;
-    }
-
-    .department-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    .department-card {
-      background: white;
-      border-radius: 24px;
-      padding: 2.5rem;
-      box-shadow: 0 15px 40px rgba(100, 40, 20, 0.12);
-      border: 2px solid rgba(255, 221, 224, 0.5);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .department-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--peach-1), var(--peach-2));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .department-card:hover::before {
-      opacity: 0.05;
-    }
-
-    .department-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(100, 40, 20, 0.2);
-      border-color: var(--peach-1);
-    }
-
-    .department-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      display: block;
-      animation: float 3s ease-in-out infinite;
-      position: relative;
-      z-index: 1;
-    }
-
-    .department-name {
-      font-size: 1.6rem;
-      color: var(--chef-brown);
-      font-weight: 800;
-      margin-bottom: 0.8rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .department-desc {
-      color: #8b4c3a;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
-
-    .department-contact {
-      position: relative;
-      z-index: 1;
-    }
-
-    .dept-contact-item {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 0.8rem;
-      color: var(--chef-brown);
-      font-size: 0.95rem;
-      padding: 0.5rem;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .dept-contact-item:hover {
-      background: rgba(255, 150, 130, 0.1);
-    }
-
-    .dept-contact-item a {
-      color: var(--chef-brown);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .dept-contact-item a:hover {
-      color: var(--peach-1);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 968px) {
-      .contact-hero h1 {
-        font-size: 3rem;
-        letter-spacing: -1px;
-      }
-
-      .contact-main-grid,
-      .branch-grid,
-      .department-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .contact-form-section,
-      .quick-contact-section,
-      .branch-card,
-      .department-card {
-        padding: 2rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .contact-hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .contact-form-section,
-      .quick-contact-section,
-      .branch-card,
-      .department-card {
-        padding: 1.5rem;
-        border-radius: 20px;
-      }
-
-      .social-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <!-- Background Decorations -->
-  <div class="bg-decoration circle1"></div>
-  <div class="bg-decoration circle2"></div>
-
-  <nav>
+<!-- NAV -->
+<nav>
   <div class="nav-container">
     <a href="homepage.php" class="logo">
       <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
@@ -614,9 +22,10 @@
       <a href="cart.php">Cart</a>
       <a href="dashboard.php">Dashboard</a>
       <a href="locations.php">Locations</a>
-      <a href="aboutus.php">About Us</a>
+      <a href="aboutus.php">About</a>
       <a href="contactus.php" class="active">Contact Us</a>
       <a href="feedback.php">Feedback</a>
+      <a href="profile.php">Profile</a>
       <a href="login.php">Logout</a>
     </div>
   </div>
@@ -685,8 +94,8 @@
         <div class="quick-info-item social-section">
           <h4>Follow Us</h4>
           <div class="social-links">
-            <a href="https://instagram.com/chefify" target="_blank" class="social-btn" title="Instagram">📷</a>
-            <a href="https://tiktok.com/@chefify" target="_blank" class="social-btn" title="TikTok">🎵</a>
+            <a href="https://www.instagram.com/chefifyapp?igsh=Z3RhMW43dndoN281&utm_source=qr" target="_blank" class="social-btn" title="Instagram">📷</a>
+            <a href="https://www.tiktok.com/@chefifyapp?_r=1&_t=ZS-92RNDS9aRWs" target="_blank" class="social-btn" title="TikTok">🎵</a>
           </div>
         </div>
       </div>
@@ -777,7 +186,7 @@
           <div class="department-contact">
             <div class="dept-contact-item">
               <span class="branch-icon">📞</span>
-              <a href="tel:+60326881100">+603-2688 1100</a>
+              <a href="tel:+60326881100">+60 18-2505 922</a>
             </div>
             <div class="dept-contact-item">
               <span class="branch-icon">✉️</span>
@@ -794,7 +203,7 @@
           <div class="department-contact">
             <div class="dept-contact-item">
               <span class="branch-icon">📞</span>
-              <a href="tel:+60326881200">+603-2688 1200</a>
+              <a href="tel:+60326881200">+60 19-990 4573</a>
             </div>
             <div class="dept-contact-item">
               <span class="branch-icon">✉️</span>
@@ -808,5 +217,82 @@
 
   </div>
 
+  <!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    
+    <!-- Footer Top -->
+    <div class="footer-top">
+      
+      <!-- Logo & Social Section -->
+      <div class="footer-logo-section">
+        <div class="footer-logo">
+          <img src="img/chefify.jpg" alt="Chefify Logo" onerror="this.src='https://via.placeholder.com/70/4b2e19/FFFFFF?text=C'">
+          <span class="footer-logo-text">Chefify</span>
+        </div>
+        
+        <p class="footer-tagline">
+          Delicious moments, rewarding experiences. Order now and earn points with every meal!
+        </p>
+        
+        <div class="footer-social">
+          <a href="https://www.tiktok.com/@chefifyapp?_r=1&_t=ZS-92RNDS9aRWs" target="_blank" rel="noopener" class="social-icon" title="Follow us on TikTok">
+            <img src="img/tiktok.png" alt="TikTok">
+          </a>
+          <a href="https://www.instagram.com/chefifyapp?igsh=Z3RhMW43dndoN281&utm_source=qr" target="_blank" rel="noopener" class="social-icon" title="Follow us on Instagram">
+            <img src="img/instagram.webp" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h3>Get in Touch</h3>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div class="contact-text">
+            Kuala Lumpur, Malaysia
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div class="contact-text">
+            <a href="mailto:hello@chefify.com">hello@chefify.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📱</span>
+          <div class="contact-text">
+            <a href="tel:+60326888888">+603-2688 8888</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div>
+        © 2025 Chefify. All rights reserved.
+      </div>
+      <ul class="footer-links-inline">
+        <li><a href="privacy.php">Privacy Policy</a></li>
+        <li><a href="terms.php">Terms of Service</a></li>
+        <li><a href="cookies.php">Cookie Policy</a></li>
+      </ul>
+    </div>
+    
+  </div>
+</footer>
+
 </body>
+</html>
+
+  </div>
+
+</body>
+
 </html>
