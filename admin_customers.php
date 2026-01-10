@@ -4,251 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manage Customers | Chefify Admin</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="icon" href="img/chefify.jpg" type="image/png">
-<style>
-/* KEKAL THEME ASAL AWAK */
-:root{
-  --chef-brown:#4b2e19;
-  --peach-1:#ffd6c8;
-  --peach-2:#ffb7a1;
-  --btn-peach:#ff9e85;
-  --btn-peach-hover:#ff6f8a;
-  --card-cream:rgba(255,230,225,0.85);
-}
 
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:'Arial', Helvetica, sans-serif;
-  background:url('img/wallpaper4.jpg') no-repeat center/cover fixed;
-  color:var(--chef-brown);
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:rgba(255,170,150,.45);
-  z-index:-1;
-}
-
-/* ================= NAV (IKUT FORMAT ASAL) ================= */
-nav{
-  position:sticky;
-  top:0;
-  z-index:999;
-  background: transparent;
-  padding: 1rem 0;
-  backdrop-filter: blur(4px);
-}
-
-.nav-container{
-  max-width:1200px;
-  margin:0 auto;
-  padding: 0 1rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  text-decoration:none;
-}
-
-.logo-img{
-  height:60px;
-  width:auto;
-  border-radius:50%;
-  border:2px solid #ffdde0;
-  box-shadow:0 4px 12px rgba(100,40,20,0.35);
-}
-
-.logo-text{
-  font-size:1.6rem;
-  font-weight:800;
-  color:var(--chef-brown);
-  letter-spacing:0.5px;
-}
-
-.nav-links{
-  display:flex;
-  gap:0.35rem;
-  align-items:center;
-}
-
-.nav-links a{
-  color:var(--chef-brown);
-  text-decoration:none;
-  padding:0.45rem 0.9rem;
-  border-radius:20px;
-  font-weight:600;
-  transition:all .22s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active{
-  color:white;
-  background: linear-gradient(45deg,var(--peach-1),var(--peach-2));
-  box-shadow: 0 6px 18px rgba(255,150,130,0.18);
-  transform:translateY(-3px);
-}
-
-/* Dropdown Dashboard */
-.nav-dropdown{ position:relative; }
-.nav-dropdown > a{ cursor:pointer; }
-.dropdown-menu{
-  position:absolute;
-  top:100%;
-  left:0;
-  background:white;
-  min-width:180px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  display:none;
-  z-index:999;
-}
-.nav-dropdown:hover .dropdown-menu{ display:block; }
-.dropdown-menu a{ display:block; padding:0.8rem 1.2rem; color:var(--chef-brown); text-decoration:none; font-weight:600; }
-.dropdown-menu a:hover{ background:linear-gradient(45deg,var(--peach-1),var(--peach-2)); color:white; }
-
-/* ===== PAGE HEADER (IKUT FORMAT ASAL) ===== */
-.header{
-  max-width:1200px;
-  margin:4rem auto 2rem;
-  padding:1rem 1.5rem;
-  background:#F4F4F4; /* UPDATED COLOR */
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(75,46,25,0.2);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-/* ===== TABLE & ACTIONS ===== */
-.container{ max-width:1200px; margin:2rem auto; padding:0 1.5rem; }
-table{ width:100%; background:white; border-radius:14px; border-collapse:collapse; overflow:hidden; box-shadow:0 12px 28px rgba(0,0,0,0.1); }
-th, td{ padding:1rem; text-align:left; }
-th{ background:#fff1ec; font-size:.9rem; }
-tr:not(:last-child){ border-bottom:1px solid #eee; }
-
-.status{ padding:.35rem .9rem; border-radius:20px; font-weight:700; font-size:.8rem; }
-.Membership{ background:#d4f7dc; color:#1b7a3a; }
-.Regular{ background:#fff0c2; color:#9c6a00; }
-.VIP{ background:#ffe3dc; color:#b44b2a; }
-
-.action-btn { border: none; padding: 8px 14px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.8rem; transition: 0.2s; margin-right: 5px; }
-.btn-edit { background: #e2e8f0; color: #475569; }
-.btn-gift { background: var(--btn-peach); color: white; }
-.btn-gift:hover { background: var(--btn-peach-hover); transform: scale(1.05); }
-
-/* ===== LEADERBOARD (WIDE VERSION) ===== */
-.leaderboard-section {
-  max-width: 800px; 
-  margin: 3rem auto; 
-  background: rgba(255, 255, 255, 0.6); 
-  padding: 35px 30px; 
-  border-radius: 30px;
-  box-shadow: 0 15px 35px rgba(75, 46, 25, 0.1); 
-  border: 1px solid rgba(255, 255, 255, 0.8); 
-  backdrop-filter: blur(10px);
-}
-.leaderboard-section h2 { text-align: center; margin-bottom: 30px; font-weight: 800; color: var(--chef-brown); }
-.leaderboard-container { display: flex; flex-direction: column; gap: 12px; max-height: 400px; overflow-y: auto; padding-right: 12px; }
-.leaderboard-row { display: grid; grid-template-columns: 60px 70px 1fr 150px; align-items: center; background: rgba(255, 255, 255, 0.55); padding: 15px 25px; border-radius: 20px; transition: 0.3s; }
-.leaderboard-row:hover { background: white; transform: scale(1.01); }
-
-/* ===== MODAL STYLE (BEAUTIFUL POPUP) ===== */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none;
-  align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px);
-}
-.modal-content {
-  background: white; padding: 30px; border-radius: 25px; width: 400px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2); animation: popIn 0.3s ease;
-}
-@keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.quick-gift-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0; }
-.quick-btn { background: #fff1ec; border: 1.5px solid var(--peach-2); padding: 10px; border-radius: 12px; cursor: pointer; font-weight: 700; transition: 0.2s; }
-.quick-btn:hover { background: var(--peach-2); color: white; }
-.modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
-.modal-btn { padding: 12px 24px; border-radius: 12px; border: none; cursor: pointer; font-weight: 600; }
-.save-btn { background: var(--btn-peach); color: white; }
-.cancel-btn { background: #eee; }
-
-/* ===== TOAST NOTIFICATION STYLE ===== */
-#toast {
-  visibility: hidden;
-  min-width: 250px;
-  background-color: var(--chef-brown);
-  color: #fff;
-  text-align: center;
-  border-radius: 15px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1100;
-  left: 50%;
-  bottom: 30px;
-  transform: translateX(-50%);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  font-weight: 600;
-  border: 2px solid var(--peach-2);
-}
-
-#toast.show {
-  visibility: visible;
-  animation: slideUp 0.5s, fadeOut 0.5s 2.5s;
-}
-
-@keyframes slideUp {
-  from { bottom: 0; opacity: 0; }
-  to { bottom: 30px; opacity: 1; }
-}
-
-@keyframes fadeOut {
-  from { bottom: 30px; opacity: 1; }
-  to { bottom: 0; opacity: 0; }
-}
-
-</style>
-</head>
-<body>
+<link rel="stylesheet" href="css/admin_customers.css">
 
 <nav>
-  <div class="nav-container">
-    <a href="homepage.php" class="logo">
-      <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
-      <span class="logo-text">Chefify</span>
-    </a>
-    <div class="nav-links">
-      <a href="homepage.php">Home</a>
-      <a href="menu.php">Menu</a>
-      <a href="cart.php">Cart</a>
-
-      <div class="nav-dropdown">
-        <a class="active">Dashboard ▾</a>
-        <div class="dropdown-menu">
-          <a href="admin_order.php">Manage Orders</a>
-          <a href="admin_menu.php">Menu Inventory</a>
-          <a href="admin_customers.php">Customers</a>
+    <div class="nav-container">
+        <a href="homepage.php" class="logo">
+            <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
+            <span class="logo-text">Chefify</span>
+        </a>
+        <div class="nav-links">
+            <div class="nav-dropdown">
+                <a class="active">Dashboard ▾</a>
+                <div class="dropdown-menu">
+                    <a href="admin_order.php">Manage Orders</a>
+                    <a href="admin_menu.php">Menu Inventory</a>
+                    <a href="admin_customers.php">Customers</a>
+                </div>
+            </div>
+            <a href="admin_feedback.php">Feedback</a>
+            <a href="profile.php">Profile</a>
+            <a href="login.php">Logout</a>
         </div>
-      </div>
-
-      <a href="locations.php">Locations</a>
-      <a href="aboutus.php">About Us</a>
-      <a href="login.php">Logout</a>
     </div>
-  </div>
 </nav>
 
 <div class="header"> 
-  <h2>Manage Customers</h2>  
-   <a href="admin_dashboard.php" 
-   style="text-decoration:none; color:var(--chef-brown);
-    font-weight:600; background:var(--peach-1); padding:.5rem 1rem; 
-    border-radius:20px;">← Back to dashboard</a> </div>
+  <h2><i class="fa-solid fa-users"></i> Manage Customers</h2>  
+  <a href="admin_dashboard.php" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back to dashboard
+  </a> 
+</div>
 
 
 <div class="container">
@@ -310,6 +98,78 @@ tr:not(:last-child){ border-bottom:1px solid #eee; }
     </div>
   </div>
 </div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    
+    <!-- Footer Top -->
+    <div class="footer-top">
+      
+      <!-- Logo & Social Section -->
+      <div class="footer-logo-section">
+        <div class="footer-logo">
+          <img src="img/chefify.jpg" alt="Chefify Logo" onerror="this.src='https://via.placeholder.com/70/4b2e19/FFFFFF?text=C'">
+          <span class="footer-logo-text">Chefify</span>
+        </div>
+        
+        <p class="footer-tagline">
+          Delicious moments, rewarding experiences. Order now and earn points with every meal!
+        </p>
+        
+        <div class="footer-social">
+          <a href="https://www.tiktok.com/@chefifyapp?_r=1&_t=ZS-92RNDS9aRWs" target="_blank" rel="noopener" class="social-icon" title="Follow us on TikTok">
+            <img src="img/tiktok.png" alt="TikTok">
+          </a>
+          <a href="https://www.instagram.com/chefifyapp?igsh=Z3RhMW43dndoN281&utm_source=qr" target="_blank" rel="noopener" class="social-icon" title="Follow us on Instagram">
+            <img src="img/instagram.webp" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h3>Get in Touch</h3>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div class="contact-text">
+            Kuala Lumpur, Malaysia
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div class="contact-text">
+            <a href="mailto:hello@chefify.com">hello@chefify.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📱</span>
+          <div class="contact-text">
+            <a href="tel:+60123456789">+60 12-345 6789</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div>
+        © 2025 Chefify. All rights reserved.
+      </div>
+      <ul class="footer-links-inline">
+        <li><a href="privacy.php">Privacy Policy</a></li>
+        <li><a href="terms.php">Terms of Service</a></li>
+        <li><a href="cookies.php">Cookie Policy</a></li>
+      </ul>
+    </div>
+    
+  </div>
+</footer>
+
 
 <script>
 let customers = [
