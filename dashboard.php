@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,6 +167,8 @@
 
     </div>
   </section>
+
+</main>
 <!-- FOOTER -->
 <footer>
   <div class="footer-container">
@@ -236,8 +239,6 @@
     
   </div>
 </footer>
-</main>
-
 
 <script>
 /* ===== DASHBOARD BANNER FADE ===== */
