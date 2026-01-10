@@ -5,638 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaderboard - Chefify</title>
   <link rel="icon" href="img/chefify.jpg" type="image/png" />
-  <style>
-    :root {
-      --chef-brown: #64281a;
-      --peach-1: #ff9682;
-      --peach-2: #ffb4a8;
-      --cream: #fff5f0;
-      --light-peach: #ffdde0;
-      --gold: #ffd700;
-      --silver: #c0c0c0;
-      --bronze: #cd7f32;
-    }
+  <link rel="stylesheet" href="css/leaderboard.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 100%);
-      min-height: 100vh;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    @keyframes shine {
-      0% { background-position: -200%; }
-      100% { background-position: 200%; }
-    }
-
-    /* ================= NAV ================= */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: transparent;
-      padding: 1.25rem 0;
-      backdrop-filter: blur(4px);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      z-index: 2;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      text-decoration: none;
-    }
-
-    .logo-img {
-      height: 60px;
-      width: auto;
-      border-radius: 50%;
-      border: 2px solid #ffdde0;
-      box-shadow: 0 4px 12px rgba(100, 40, 20, 0.35);
-    }
-
-    .logo-text {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--chef-brown);
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.35rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--chef-brown);
-      text-decoration: none;
-      padding: 0.45rem 0.9rem;
-      border-radius: 20px;
-      font-weight: 600;
-      transition: all .22s ease;
-    }
-
-    .nav-links a:hover {
-      color: white;
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      box-shadow: 0 6px 18px rgba(255, 150, 130, 0.18);
-      transform: translateY(-3px);
-    }
-
-    .nav-links a.active {
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      color: white;
-    }
-
-    /* ================= LEADERBOARD ================= */
-    .leaderboard-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-    }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .page-header h1 {
-      font-size: 3.5rem;
-      color: var(--chef-brown);
-      margin-bottom: 0.5rem;
-      font-weight: 800;
-    }
-
-    .page-header p {
-      font-size: 1.2rem;
-      color: #8b4c3a;
-    }
-
-    /* Timer Card */
-    .timer-card {
-      background: linear-gradient(135deg, var(--peach-1), var(--peach-2));
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      color: white;
-      box-shadow: 0 10px 30px rgba(255, 150, 130, 0.3);
-    }
-
-    .timer-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .timer-display {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-
-    /* Tabs */
-    .tabs-container {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .tab-btn {
-      background: white;
-      border: 2px solid rgba(255, 150, 130, 0.3);
-      padding: 0.8rem 1.5rem;
-      border-radius: 20px;
-      font-weight: 700;
-      color: var(--chef-brown);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-    }
-
-    .tab-btn:hover {
-      border-color: var(--peach-1);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(255, 150, 130, 0.2);
-    }
-
-    .tab-btn.active {
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      color: white;
-      border-color: transparent;
-      box-shadow: 0 8px 25px rgba(255, 150, 130, 0.3);
-    }
-
-    /* Top 3 Podium */
-    .podium-section {
-      background: white;
-      border-radius: 24px;
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 10px 40px rgba(100, 40, 20, 0.12);
-    }
-
-    .podium-title {
-      font-size: 2rem;
-      color: var(--chef-brown);
-      margin-bottom: 2rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .podium {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .podium-place {
-      text-align: center;
-      position: relative;
-    }
-
-    .podium-place.first {
-      order: 2;
-    }
-
-    .podium-place.second {
-      order: 1;
-    }
-
-    .podium-place.third {
-      order: 3;
-    }
-
-    .podium-avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      border: 5px solid;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      position: relative;
-    }
-
-    .podium-place.first .podium-avatar {
-      width: 120px;
-      height: 120px;
-      border-color: var(--gold);
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .podium-place.second .podium-avatar {
-      border-color: var(--silver);
-      background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
-    }
-
-    .podium-place.third .podium-avatar {
-      border-color: var(--bronze);
-      background: linear-gradient(135deg, #cd7f32, #e8a87c);
-    }
-
-    .crown {
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2rem;
-      animation: float 2s ease-in-out infinite;
-    }
-
-    .podium-rank {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-    }
-
-    .podium-place.first .podium-rank { color: var(--gold); }
-    .podium-place.second .podium-rank { color: var(--silver); }
-    .podium-place.third .podium-rank { color: var(--bronze); }
-
-    .podium-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--chef-brown);
-      margin-bottom: 0.3rem;
-    }
-
-    .podium-level {
-      font-size: 0.9rem;
-      color: var(--peach-1);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .podium-points {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #8b4c3a;
-    }
-
-    .podium-base {
-      background: linear-gradient(135deg, #fff5f0, #ffe8e0);
-      padding: 1.5rem 1rem;
-      border-radius: 12px;
-      margin-top: 1rem;
-    }
-
-    .podium-place.first .podium-base {
-      padding: 2rem 1rem;
-    }
-
-    /* Your Position Card */
-    .your-position-card {
-      background: linear-gradient(135deg, rgba(255, 150, 130, 0.1), rgba(255, 180, 168, 0.1));
-      border: 3px solid var(--peach-1);
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .your-position-info {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .your-avatar {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--peach-1), var(--peach-2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      border: 3px solid white;
-      box-shadow: 0 6px 20px rgba(255, 150, 130, 0.3);
-    }
-
-    .your-details h3 {
-      font-size: 1.3rem;
-      color: var(--chef-brown);
-      margin-bottom: 0.3rem;
-    }
-
-    .your-details p {
-      color: #8b4c3a;
-      font-weight: 600;
-    }
-
-    .your-motivation {
-      text-align: right;
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .motivation-text {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--peach-1);
-      margin-bottom: 0.3rem;
-    }
-
-    .points-needed {
-      font-size: 0.95rem;
-      color: #8b4c3a;
-    }
-
-    /* Leaderboard Table */
-    .leaderboard-table-section {
-      background: white;
-      border-radius: 24px;
-      padding: 2.5rem;
-      box-shadow: 0 10px 40px rgba(100, 40, 20, 0.12);
-    }
-
-    .table-title {
-      font-size: 2rem;
-      color: var(--chef-brown);
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-    }
-
-    .leaderboard-table {
-      width: 100%;
-    }
-
-    .table-row {
-      display: grid;
-      grid-template-columns: 80px 80px 1fr 150px 120px 100px;
-      gap: 1rem;
-      align-items: center;
-      padding: 1.2rem 1rem;
-      border-radius: 16px;
-      margin-bottom: 0.8rem;
-      transition: all 0.3s ease;
-      background: linear-gradient(135deg, #fff5f0, #ffe8e0);
-    }
-
-    .table-row:hover {
-      transform: translateX(10px);
-      box-shadow: 0 6px 20px rgba(100, 40, 20, 0.1);
-    }
-
-    .table-row.current-user {
-      background: linear-gradient(135deg, rgba(255, 150, 130, 0.2), rgba(255, 180, 168, 0.2));
-      border: 2px solid var(--peach-1);
-    }
-
-    .rank-cell {
-      font-size: 1.5rem;
-      font-weight: 800;
-      text-align: center;
-    }
-
-    .rank-movement {
-      font-size: 0.9rem;
-      margin-left: 0.3rem;
-    }
-
-    .rank-movement.up { color: #22c55e; }
-    .rank-movement.down { color: #ef4444; }
-    .rank-movement.same { color: #8b4c3a; opacity: 0.6; }
-
-    .avatar-cell {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--light-peach), var(--peach-2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      border: 3px solid white;
-      box-shadow: 0 4px 12px rgba(100, 40, 20, 0.2);
-    }
-
-    .user-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .username {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--chef-brown);
-    }
-
-    .user-level {
-      font-size: 0.85rem;
-      color: var(--peach-1);
-      font-weight: 600;
-    }
-
-    .level-cell {
-      text-align: center;
-      font-weight: 700;
-      color: var(--chef-brown);
-      font-size: 1rem;
-    }
-
-    .points-cell {
-      text-align: center;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--peach-1);
-    }
-
-    .badges-cell {
-      text-align: center;
-      font-size: 1rem;
-      color: #8b4c3a;
-      font-weight: 600;
-    }
-
-    /* Rewards Section */
-    .rewards-section {
-      background: white;
-      border-radius: 24px;
-      padding: 2.5rem;
-      margin-top: 2rem;
-      box-shadow: 0 10px 40px rgba(100, 40, 20, 0.12);
-    }
-
-    .rewards-title {
-      font-size: 2rem;
-      color: var(--chef-brown);
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .rewards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .reward-card {
-      background: linear-gradient(135deg, #fff5f0, #ffe8e0);
-      border-radius: 16px;
-      padding: 1.5rem;
-      text-align: center;
-      border: 2px solid rgba(255, 150, 130, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .reward-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--peach-1);
-      box-shadow: 0 8px 25px rgba(100, 40, 20, 0.15);
-    }
-
-    .reward-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .reward-rank {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--chef-brown);
-      margin-bottom: 0.5rem;
-    }
-
-    .reward-prize {
-      color: var(--peach-1);
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 968px) {
-      .page-header h1 {
-        font-size: 2.5rem;
-      }
-
-      .podium {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .podium-place {
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .podium-place.first,
-      .podium-place.second,
-      .podium-place.third {
-        order: initial;
-      }
-
-      .table-row {
-        grid-template-columns: 60px 60px 1fr 100px;
-        gap: 0.5rem;
-        font-size: 0.9rem;
-      }
-
-      .level-cell,
-      .badges-cell {
-        display: none;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .your-position-card {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .your-motivation {
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .page-header h1 {
-        font-size: 2rem;
-      }
-
-      .podium-section,
-      .leaderboard-table-section,
-      .rewards-section {
-        padding: 1.5rem;
-      }
-
-      .table-row {
-        grid-template-columns: 50px 50px 1fr 80px;
-        padding: 1rem 0.5rem;
-      }
-
-      .tabs-container {
-        gap: 0.3rem;
-      }
-
-      .tab-btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <!-- NAV -->
-  <nav>
-    <div class="nav-container">
-      <a class="logo" href="home.html">
-        <img src="img/chefify.jpg" class="logo-img" alt="Chefify Logo">
-        <span class="logo-text">Chefify</span>
-      </a>
-      <div class="nav-links">
-        <a href="home.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="cart.html">Cart</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="locations.html">Locations</a>
-        <a href="aboutus.html">About</a>
-        <a href="contactus.html">Contact Us</a>
-        <a href="index.html">Logout</a>
-      </div>
+<!-- NAV -->
+<nav>
+  <div class="nav-container">
+    <a href="homepage.php" class="logo">
+      <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
+      <span class="logo-text">Chefify</span>
+    </a>
+    <div class="nav-links" role="menu" aria-label="Main links">
+      <a href="homepage.php">Home</a>
+      <a href="menu.php">Menu</a>
+      <a href="cart.php">Cart</a>
+      <a href="dashboard.php">Dashboard</a>
+      <a href="locations.php">Locations</a>
+      <a href="aboutus.php">About</a>
+      <a href="contactus.php">Contact Us</a>
+      <a href="feedback.php">Feedback</a>
+      <a href="profile.php">Profile</a>
+      <a href="login.php">Logout</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- LEADERBOARD CONTAINER -->
   <div class="leaderboard-container">
+
+  <main class="points-container">
+  
+  <a href="dashboard.php" class="back-btn">← Back to Dashboard</a>
     
     <!-- PAGE HEADER -->
     <div class="page-header">
@@ -718,6 +118,77 @@
     </div>
 
   </div>
+
+    <!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    
+    <!-- Footer Top -->
+    <div class="footer-top">
+      
+      <!-- Logo & Social Section -->
+      <div class="footer-logo-section">
+        <div class="footer-logo">
+          <img src="img/chefify.jpg" alt="Chefify Logo" onerror="this.src='https://via.placeholder.com/70/4b2e19/FFFFFF?text=C'">
+          <span class="footer-logo-text">Chefify</span>
+        </div>
+        
+        <p class="footer-tagline">
+          Delicious moments, rewarding experiences. Order now and earn points with every meal!
+        </p>
+        
+        <div class="footer-social">
+          <a href="https://www.tiktok.com/@chefifyapp?_r=1&_t=ZS-92RNDS9aRWs" target="_blank" rel="noopener" class="social-icon" title="Follow us on TikTok">
+            <img src="img/tiktok.png" alt="TikTok">
+          </a>
+          <a href="https://www.instagram.com/chefifyapp?igsh=Z3RhMW43dndoN281&utm_source=qr" target="_blank" rel="noopener" class="social-icon" title="Follow us on Instagram">
+            <img src="img/instagram.webp" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h3>Get in Touch</h3>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div class="contact-text">
+            Kuala Lumpur, Malaysia
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div class="contact-text">
+            <a href="mailto:hello@chefify.com">hello@chefify.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📱</span>
+          <div class="contact-text">
+            <a href="tel:+60123456789">+603-2688 8888</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div>
+        © 2025 Chefify. All rights reserved.
+      </div>
+      <ul class="footer-links-inline">
+        <li><a href="privacy.php">Privacy Policy</a></li>
+        <li><a href="terms.php">Terms of Service</a></li>
+        <li><a href="cookies.php">Cookie Policy</a></li>
+      </ul>
+    </div>
+    
+  </div>
+</footer>
 
   <script>
     // Get current user data
@@ -836,4 +307,42 @@
         document.getElementById('pointsNeeded').textContent = `${pointsToNext} points to overtake #${rank - 1}`;
       } else {
         document.getElementById('motivationMsg').textContent = "Keep climbing! 🚀";
-        const pointsToTop10 = leaderboardData[9
+        const pointsToTop10 = leaderboardData[9].points - currentUserPoints + 1;
+        document.getElementById('pointsNeeded').textContent = `Only ${pointsToTop10} points to reach Top 10!`;
+      }
+    }
+
+    // Countdown Timer
+    function updateCountdown() {
+      const now = new Date();
+      const nextMonday = new Date();
+      nextMonday.setDate(now.getDate() + ((1 + 7 - now.getDay()) % 7 || 7));
+      nextMonday.setHours(0, 0, 0, 0);
+      
+      const diff = nextMonday - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      document.getElementById('countdown').textContent = `${days}d ${hours}h ${minutes}m`;
+    }
+
+    // Switch Tabs
+    function switchTab(tab) {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // In a real app, you'd fetch different data based on the tab
+      console.log('Switched to:', tab);
+    }
+
+    // Initialize
+    renderPodium();
+    renderTable();
+    updateYourPosition();
+    updateCountdown();
+    setInterval(updateCountdown, 60000); // Update every minute
+  </script>
+</body>
+</html>
