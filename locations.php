@@ -4,276 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Locations - Chefify</title>
-  <style>
-    :root {
-      --chef-brown: #64281a;
-      --peach-1: #ff9682;
-      --peach-2: #ffb4a8;
-      --cream: #fff5f0;
-      --light-peach: #ffdde0;
-    }
+  <link rel="icon" href="img/chefify.jpg" type="image/png" />
+  <link rel="stylesheet" href="css/locations.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 100%);
-      min-height: 100vh;
-    }
-
-    /* ================= NAV ================= */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: transparent;
-      padding: 1.25rem 0;
-      backdrop-filter: blur(4px);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      z-index: 2;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      text-decoration: none;
-    }
-
-    .logo-img {
-      height: 60px;
-      width: auto;
-      border-radius: 50%;
-      border: 2px solid #ffdde0;
-      box-shadow: 0 4px 12px rgba(100, 40, 20, 0.35);
-    }
-
-    .logo-text {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--chef-brown);
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.35rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--chef-brown);
-      text-decoration: none;
-      padding: 0.45rem 0.9rem;
-      border-radius: 20px;
-      font-weight: 600;
-      transition: all .22s ease;
-    }
-
-    .nav-links a:hover {
-      color: white;
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      box-shadow: 0 6px 18px rgba(255, 150, 130, 0.18);
-      transform: translateY(-3px);
-    }
-
-    .nav-links a.active {
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      color: white;
-    }
-
-    /* ================= LOCATIONS PAGE ================= */
-    .locations-hero {
-      text-align: center;
-      padding: 4rem 1rem 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .locations-hero h1 {
-      font-size: 3.5rem;
-      color: var(--chef-brown);
-      margin-bottom: 1rem;
-      font-weight: 800;
-    }
-
-    .locations-hero p {
-      font-size: 1.2rem;
-      color: #8b4c3a;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .locations-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-    }
-
-    .location-card {
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      margin-bottom: 3rem;
-      box-shadow: 0 10px 40px rgba(100, 40, 20, 0.12);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .location-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 50px rgba(100, 40, 20, 0.18);
-    }
-
-    .location-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-
-    .location-image {
-      background: linear-gradient(135deg, var(--light-peach), var(--peach-2));
-      min-height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .location-image::before {
-      content: '📸';
-      font-size: 4rem;
-      opacity: 0.3;
-    }
-
-    .location-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .location-details {
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .location-header {
-      margin-bottom: 1.5rem;
-    }
-
-    .location-header h2 {
-      font-size: 2rem;
-      color: var(--chef-brown);
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-
-    .location-tag {
-      display: inline-block;
-      background: linear-gradient(45deg, var(--peach-1), var(--peach-2));
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .location-info {
-      margin: 1.5rem 0;
-    }
-
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-      color: #64281a;
-    }
-
-    .info-icon {
-      font-size: 1.3rem;
-      margin-top: 0.1rem;
-    }
-
-    .info-text {
-      flex: 1;
-      line-height: 1.6;
-    }
-
-    .info-text strong {
-      display: block;
-      margin-bottom: 0.2rem;
-      color: var(--chef-brown);
-    }
-
-    .location-map {
-      width: 100%;
-      height: 300px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .location-map iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 968px) {
-      .location-content {
-        grid-template-columns: 1fr;
-      }
-
-      .location-image {
-        min-height: 300px;
-      }
-
-      .locations-hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .locations-hero h1 {
-        font-size: 2rem;
-      }
-
-      .location-header h2 {
-        font-size: 1.6rem;
-      }
-
-      .location-details {
-        padding: 1.5rem;
-      }
-    }
-  </style>
 </head>
 <body>
+<!-- NAV -->
 <nav>
   <div class="nav-container">
     <a href="homepage.php" class="logo">
@@ -286,9 +22,10 @@
       <a href="cart.php">Cart</a>
       <a href="dashboard.php">Dashboard</a>
       <a href="locations.php" class="active">Locations</a>
-      <a href="aboutus.php">About Us</a>
+      <a href="aboutus.php">About</a>
       <a href="contactus.php">Contact Us</a>
       <a href="feedback.php">Feedback</a>
+      <a href="profile.php">Profile</a>
       <a href="login.php">Logout</a>
     </div>
   </div>
@@ -493,6 +230,77 @@
     </div>
 
   </div>
+
+  <!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    
+    <!-- Footer Top -->
+    <div class="footer-top">
+      
+      <!-- Logo & Social Section -->
+      <div class="footer-logo-section">
+        <div class="footer-logo">
+          <img src="img/chefify.jpg" alt="Chefify Logo" onerror="this.src='https://via.placeholder.com/70/4b2e19/FFFFFF?text=C'">
+          <span class="footer-logo-text">Chefify</span>
+        </div>
+        
+        <p class="footer-tagline">
+          Delicious moments, rewarding experiences. Order now and earn points with every meal!
+        </p>
+        
+        <div class="footer-social">
+          <a href="https://www.tiktok.com/@chefifyapp?_r=1&_t=ZS-92RNDS9aRWs" target="_blank" rel="noopener" class="social-icon" title="Follow us on TikTok">
+            <img src="img/tiktok.png" alt="TikTok">
+          </a>
+          <a href="https://www.instagram.com/chefifyapp?igsh=Z3RhMW43dndoN281&utm_source=qr" target="_blank" rel="noopener" class="social-icon" title="Follow us on Instagram">
+            <img src="img/instagram.webp" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h3>Get in Touch</h3>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div class="contact-text">
+            Kuala Lumpur, Malaysia
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div class="contact-text">
+            <a href="mailto:hello@chefify.com">hello@chefify.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📱</span>
+          <div class="contact-text">
+            <a href="tel:+60123456789">+603-2688 8888</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div>
+        © 2025 Chefify. All rights reserved.
+      </div>
+      <ul class="footer-links-inline">
+        <li><a href="privacy.php">Privacy Policy</a></li>
+        <li><a href="terms.php">Terms of Service</a></li>
+        <li><a href="cookies.php">Cookie Policy</a></li>
+      </ul>
+    </div>
+    
+  </div>
+</footer>
 
 </body>
 </html>
