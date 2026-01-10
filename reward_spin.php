@@ -4,323 +4,313 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chefify's Free Spin</title>
+
     <link rel="icon" href="img/chefify.jpg" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        :root {
-            --chef-brown: #4b2e19;
-            --peach-1: #ffd6c8;
-            --peach-2: #ffb7a1;
-            --btn-peach: #ff9e85;
-            --btn-peach-hover: #ff6f8a;
-            --white: #ffffff;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('img/wallpaper4.jpg') no-repeat center/cover fixed;
-            color: var(--chef-brown);
-            min-height: 100vh;
-        }
-
-        body::before {
-            content: ""; position: fixed; inset: 0;
-            background: rgba(255, 170, 150, 0.45); z-index: -1;
-        }
-
-        /* HEADER KONSISTEN */
-        .header {
-            max-width: 1200px;
-            margin: 2rem auto 1rem;
-            padding: 1rem 1.5rem;
-            background: #F4F4F4;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(75, 46, 25, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header h2 { font-size: 1.6rem; display: flex; align-items: center; gap: 10px; }
-        
-        .back-link {
-            text-decoration: none;
-            color: var(--chef-brown);
-            font-weight: 700;
-            background: var(--peach-1);
-            padding: 8px 18px;
-            border-radius: 20px;
-            transition: 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .back-link:hover {
-            background: var(--peach-2);
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        /* MAIN CONTAINER */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .wheel-wrapper {
-            position: relative;
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-        }
-
-        /* Pointer / Anak Panah */
-        .pointer {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0; 
-            height: 0; 
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 35px solid var(--chef-brown);
-            z-index: 10;
-            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.2));
-        }
-
-        canvas {
-            display: block;
-            border-radius: 50%;
-            border: 8px solid white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-
-        /* SPIN BUTTON */
-        #spinBtn {
-            margin-top: 30px;
-            padding: 15px 50px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: white;
-            background: linear-gradient(45deg, var(--btn-peach), var(--btn-peach-hover));
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 111, 138, 0.4);
-            transition: 0.3s;
-        }
-
-        #spinBtn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 25px rgba(255, 111, 138, 0.6);
-        }
-
-        #spinBtn:active { transform: translateY(0); }
-
-        #spinBtn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* POPUP MODAL */
-        .popup {
-            position: fixed; inset: 0;
-            background: rgba(75, 46, 25, 0.7);
-            display: none; align-items: center; justify-content: center;
-            z-index: 1000; backdrop-filter: blur(8px);
-        }
-
-        .popup-content {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes popIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .popup-content h2 { color: var(--btn-peach-hover); margin-bottom: 10px; }
-        .popup-content p { font-size: 1.5rem; font-weight: 800; margin-bottom: 25px; color: var(--chef-brown); }
-        
-        #closePopup {
-            background: var(--chef-brown);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        #closePopup:hover { background: #000; }
-    </style>
+    <link rel="stylesheet" href="css/reward_spin.css">
 </head>
 <body>
 
-    <div class="header">
-        <h2><i class="fa-solid fa-gift"></i> Free Spin Rewards</h2>
-        <a href="dashboard.php" class="back-link">← Back to Dashboard</a>
+<nav>
+  <div class="nav-container">
+    <a href="homepage.php" class="logo">
+      <img src="img/chefify.jpg" class="logo-img" alt="Chefify">
+      <span class="logo-text">Chefify</span>
+    </a>
+      <div class="nav-links" role="menu" aria-label="Main links">
+        <a href="homepage.php">Home</a>
+        <a href="menu.php" class="active">Menu</a>
+        <a href="cart.php">Cart</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="locations.php" >Locations</a>
+        <a href="aboutus.php" >About Us</a>
+        <a href="contactus.php" >Contact Us</a>
+        <a href="feedback.php" >Feedback</a>
+        <a href="profile.php" >Profile</a>
+        <a href="login.php">Logout</a>
+      </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="header">
+    <h2><i class="fa-solid fa-gift"></i> Free Spin Rewards</h2>
+    <a href="homepage.php" class="back-link">← Back to Dashboard</a>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+    <div class="wheel-wrapper">
+        <div class="pointer"></div>
+        <canvas id="wheel" width="450" height="450"></canvas>
     </div>
 
-    <div class="container">
-        <div class="wheel-wrapper">
-            <div class="pointer"></div>
-            <canvas id="wheel" width="450" height="450"></canvas>
+    <button id="spinBtn">
+        <i class="fa-solid fa-play"></i> SPIN NOW
+    </button>
+
+    <p id="pointText" style="margin-top:15px;font-weight:700;">
+        Your Points: <span id="pointValue"></span>
+    </p>
+</div>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <i class="fa-solid fa-circle-check"
+           style="font-size:4rem;color:#2ecc71;margin-bottom:15px;"></i>
+        <h2>Congratulations!</h2>
+        <p id="resultText"></p>
+        <button id="closePopup">Redeem Now</button>
+    </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="spinSound" src="audio/spin.mp3"></audio>
+<audio id="winSound" src="audio/yeayy.mp3"></audio>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    
+    <!-- Footer Top -->
+    <div class="footer-top">
+      
+      <!-- Logo & Social Section -->
+      <div class="footer-logo-section">
+        <div class="footer-logo">
+          <img src="img/chefify.jpg" alt="Chefify Logo" onerror="this.src='https://via.placeholder.com/70/4b2e19/FFFFFF?text=C'">
+          <span class="footer-logo-text">Chefify</span>
         </div>
-        <button id="spinBtn"><i class="fa-solid fa-play"></i> SPIN NOW</button>
-    </div>
-
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: #2ecc71; margin-bottom: 15px;"></i>
-            <h2>Congratulations!</h2>
-            <p id="resultText"></p>
-            <button id="closePopup">Redeem Now</button>
+        
+        <p class="footer-tagline">
+          Delicious moments, rewarding experiences. Order now and earn points with every meal!
+        </p>
+        
+        <div class="footer-social">
+          <a href="https://www.tiktok.com/@chefifyapp?_r=1&_t=ZS-92RNDS9aRWs" target="_blank" rel="noopener" class="social-icon" title="Follow us on TikTok">
+            <img src="img/tiktok.png" alt="TikTok">
+          </a>
+          <a href="https://www.instagram.com/chefifyapp?igsh=Z3RhMW43dndoN281&utm_source=qr" target="_blank" rel="noopener" class="social-icon" title="Follow us on Instagram">
+            <img src="img/instagram.webp" alt="Instagram">
+          </a>
         </div>
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h3>Get in Touch</h3>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div class="contact-text">
+            Kuala Lumpur, Malaysia
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div class="contact-text">
+            <a href="mailto:hello@chefify.com">hello@chefify.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-icon">📱</span>
+          <div class="contact-text">
+            <a href="tel:+60123456789">+60 12-345 6789</a>
+          </div>
+        </div>
+      </div>
+      
     </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div>
+        © 2025 Chefify. All rights reserved.
+      </div>
+      <ul class="footer-links-inline">
+        <li><a href="privacy.php">Privacy Policy</a></li>
+        <li><a href="terms.php">Terms of Service</a></li>
+        <li><a href="cookies.php">Cookie Policy</a></li>
+      </ul>
+    </div>
+    
+  </div>
+</footer>
 
-    <audio id="spinSound" src="audio/spin.mp3"></audio>
+<!-- JAVASCRIPT -->
+<script>
+/* ===============================
+   CANVAS SETUP
+================================ */
+const wheel = document.getElementById("wheel");
+const ctx = wheel.getContext("2d");
+const spinBtn = document.getElementById("spinBtn");
+const popup = document.getElementById("popup");
+const resultText = document.getElementById("resultText");
+const closePopup = document.getElementById("closePopup");
+const spinSound = document.getElementById("spinSound");
+const winSound = document.getElementById("winSound");
+const pointValue = document.getElementById("pointValue");
 
-    <script>
-        const wheel = document.getElementById("wheel");
-        const ctx = wheel.getContext("2d");
-        const spinBtn = document.getElementById("spinBtn");
-        const popup = document.getElementById("popup");
-        const resultText = document.getElementById("resultText");
-        const closePopup = document.getElementById("closePopup");
-        const spinSound = document.getElementById("spinSound");
+/* ===============================
+   POINT SYSTEM (LOCAL STORAGE)
+================================ */
+const spinCost = 30;
 
-        const segments = [
-            "Free Voucher 50%",
-            "Free Tiramisu",
-            "Free Matcha Latte",
-            "Free Cookies",
-            "Free Voucher 20%",
-            "Mystery Gift" // Ditambah satu segmen supaya roda lebih seimbang
-        ];
+// Ambil point dari localStorage
+let userPoints = localStorage.getItem("chefify_points");
+userPoints = userPoints ? parseInt(userPoints) : 50;
 
-        const colors = ["#f8a1b3", "#f28fa5", "#ec7f98", "#e66f8b", "#df5f7d", "#d85072"];
+// Simpan jika kali pertama
+localStorage.setItem("chefify_points", userPoints);
 
-        const size = wheel.width;
-        const center = size / 2;
-        const radius = center;
-        let startAngle = 0;
-        let spinning = false;
+/* ===============================
+   WHEEL DATA
+================================ */
+const segments = [
+    "Free Voucher 50%",
+    "Free Tiramisu",
+    "Free Matcha Latte",
+    "Free Cookies",
+    "Free Voucher 20%",
+    "Mystery Gift"
+];
 
-        function drawWheel() {
-            const angle = (2 * Math.PI) / segments.length;
-            ctx.clearRect(0, 0, size, size);
+const colors = [
+    "#f8a1b3",
+    "#f28fa5",
+    "#ec7f98",
+    "#e66f8b",
+    "#df5f7d",
+    "#d85072"
+];
 
-            for (let i = 0; i < segments.length; i++) {
-                const start = startAngle + i * angle;
-                const end = start + angle;
+const size = wheel.width;
+const center = size / 2;
+const radius = center;
 
-                // Lukis Segmen
-                ctx.beginPath();
-                ctx.moveTo(center, center);
-                ctx.arc(center, center, radius, start, end);
-                ctx.fillStyle = colors[i];
-                ctx.fill();
-                ctx.strokeStyle = "rgba(255,255,255,0.2)";
-                ctx.stroke();
+let startAngle = 0;
+let spinning = false;
 
-                // Lukis Teks
-                ctx.save();
-                ctx.translate(center, center);
-                ctx.rotate(start + angle / 2);
-                ctx.textAlign = "right";
-                ctx.fillStyle = "#fff";
-                ctx.font = "bold 16px Arial";
-                ctx.shadowBlur = 4;
-                ctx.shadowColor = "rgba(0,0,0,0.3)";
-                ctx.fillText(segments[i], radius - 30, 8);
-                ctx.restore();
-            }
+/* ===============================
+   FUNCTIONS
+================================ */
+function updateUI() {
+    pointValue.textContent = userPoints;
 
-            // Lukis Bulatan Tengah
-            ctx.beginPath();
-            ctx.arc(center, center, 40, 0, 2 * Math.PI);
-            ctx.fillStyle = "white";
-            ctx.fill();
-            ctx.strokeStyle = varGet('--chef-brown');
-            ctx.lineWidth = 2;
-            ctx.stroke();
+    if (userPoints < spinCost) {
+        spinBtn.disabled = true;
+        spinBtn.innerHTML = "❌ Not enough points";
+    } else {
+        spinBtn.disabled = false;
+        spinBtn.innerHTML = '<i class="fa-solid fa-play"></i> SPIN NOW';
+    }
+}
 
-            // Label "CHEFIFY" di tengah
-            ctx.fillStyle = "#4b2e19";
-            ctx.font = "bold 10px Arial";
-            ctx.textAlign = "center";
-            ctx.fillText("CHEFIFY", center, center + 5);
-        }
+function drawWheel() {
+    const angle = (2 * Math.PI) / segments.length;
+    ctx.clearRect(0, 0, size, size);
 
-        // Helper untuk CSS Variable dalam JS
-        function varGet(name) {
-            return getComputedStyle(document.documentElement).getPropertyValue(name);
-        }
+    for (let i = 0; i < segments.length; i++) {
+        const start = startAngle + i * angle;
+        const end = start + angle;
 
-        function spinWheel() {
-            if (spinning) return;
-            spinning = true;
-            spinBtn.disabled = true;
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, radius, start, end);
+        ctx.fillStyle = colors[i];
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,0.2)";
+        ctx.stroke();
 
-            try {
-                spinSound.currentTime = 0;
-                spinSound.play();
-            } catch(e) { console.log("Sound play failed"); }
+        ctx.save();
+        ctx.translate(center, center);
+        ctx.rotate(start + angle / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 16px Arial";
+        ctx.fillText(segments[i], radius - 30, 8);
+        ctx.restore();
+    }
 
-            const spinAngle = Math.random() * 3000 + 3000;
-            const duration = 5000;
-            const start = performance.now();
+    ctx.beginPath();
+    ctx.arc(center, center, 40, 0, 2 * Math.PI);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.stroke();
+}
 
-            function animate(time) {
-                const progress = Math.min((time - start) / duration, 1);
-                // Ease out cubic
-                const ease = 1 - Math.pow(1 - progress, 3);
-                const angle = ease * spinAngle;
+function spinWheel() {
+    if (spinning) return;
 
-                startAngle = (angle * Math.PI / 180) % (2 * Math.PI);
-                drawWheel();
+    if (userPoints < spinCost) {
+        alert("❌ You need at least 30 points to spin!");
+        return;
+    }
 
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    const segmentAngle = 2 * Math.PI / segments.length;
-                    const pointerAngle = (3 * Math.PI / 2); // Bahagian Atas
-                    const normalized = (pointerAngle - startAngle + 2 * Math.PI) % (2 * Math.PI);
-                    const index = Math.floor(normalized / segmentAngle);
+    spinning = true;
+    spinBtn.disabled = true;
 
-                    resultText.textContent = segments[index];
-                    popup.style.display = "flex";
-                    spinning = false;
-                    spinBtn.disabled = false;
-                }
-            }
-            requestAnimationFrame(animate);
-        }
+    // Tolak point & simpan
+    userPoints -= spinCost;
+    localStorage.setItem("chefify_points", userPoints);
+    updateUI();
 
+    spinSound.currentTime = 0;
+    spinSound.play();
+
+    const spinAngle = Math.random() * 3000 + 3000;
+    const duration = 5000;
+    const start = performance.now();
+
+    function animate(time) {
+        const progress = Math.min((time - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+
+        startAngle = (ease * spinAngle * Math.PI / 180) % (2 * Math.PI);
         drawWheel();
-        spinBtn.onclick = spinWheel;
-        closePopup.onclick = () => popup.style.display = "none";
-    </script>
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            const segAngle = 2 * Math.PI / segments.length;
+            const pointerAngle = (3 * Math.PI / 2);
+            const index = Math.floor(
+                ((pointerAngle - startAngle + 2 * Math.PI) % (2 * Math.PI)) / segAngle
+            );
+
+            resultText.textContent = segments[index];
+            popup.style.display = "flex";
+
+            winSound.currentTime = 0;
+            winSound.play();
+
+            spinning = false;
+            updateUI();
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+/* ===============================
+   INIT
+================================ */
+drawWheel();
+updateUI();
+
+spinBtn.addEventListener("click", spinWheel);
+closePopup.addEventListener("click", () => {
+    popup.style.display = "none";
+});
+</script>
+
 </body>
 </html>
+
 
 
 
