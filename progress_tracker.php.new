@@ -1,0 +1,137 @@
+<?php
+require_once 'db.php';
+// Require login
+if (!isset($_SESSION['user_id'])) {
+  header('Location: login.php');
+  exit();
+}
+$userId = $_SESSION['user_id'];
+
+// Defaults
+$points = 0;
+$totalPointsEarned = 0;
+$totalOrders = 0;
+$total_spent = 0.0;
+$memberDays = 0;
+$orderStreak = 0;
+$avgPoints = 0;
+$favoriteItem = '-';
+$weeklyOrders = 0;
+$weeklyPoints = 0;
+$recentActivities = [];
+
+try {
+  // User join date
+  $stmt = $pdo->prepare("SELECT created_at FROM users WHERE user_id = :uid");
+  $stmt->execute([':uid' => $userId]);
+  $u = $stmt->fetch();
+  $joinDate = $u ? $u['created_at'] : date('Y-m-d');
+
+  // Reward points
+  $stmt = $pdo->prepare("SELECT points, total_points_earned FROM reward_points WHERE user_id = :uid");
+  $stmt->execute([':uid' => $userId]);
+  $rp = $stmt->fetch();
+  if ($rp) {
+    $points = (int)$rp['points'];
+    $totalPointsEarned = (int)$rp['total_points_earned'];
+  }
+
+  // User progress (orders, spent)
+  $stmt = $pdo->prepare("SELECT total_orders, total_spent FROM user_progress WHERE user_id = :uid");
+  $stmt->execute([':uid' => $userId]);
+  $up = $stmt->fetch();
+  if ($up) {
+    $totalOrders = (int)$up['total_orders'];
+    $total_spent = (float)$up['total_spent'];
+  } else {
+    $stmt = $pdo->prepare("SELECT COUNT(*) AS cnt, COALESCE(SUM(total_amount),0) AS spent FROM orders WHERE user_id = :uid");
+    $stmt->execute([':uid' => $userId]);
+    $or = $stmt->fetch();
+    $totalOrders = (int)$or['cnt'];
+    $total_spent = (float)$or['spent'];
+  }
+
+  // avg points per order
+  $avgPoints = $totalOrders > 0 ? round($totalPointsEarned / $totalOrders) : 0;
+
+  // member days
+  $created = new DateTime($joinDate);
+  $now = new DateTime();
+  $memberDays = $created->diff($now)->days;
+
+  // favorite item
+  $stmt = $pdo->prepare("SELECT m.name, COUNT(*) AS cnt FROM orders o JOIN order_items oi ON o.order_id = oi.order_id JOIN menu_items m ON oi.item_id = m.item_id WHERE o.user_id = :uid GROUP BY oi.item_id ORDER BY cnt DESC LIMIT 1");
+  $stmt->execute([':uid' => $userId]);
+  $fav = $stmt->fetch();
+  if ($fav) $favoriteItem = $fav['name'];
+
+  // weekly orders and estimated points (sum floor(total_amount))
+  $stmt = $pdo->prepare("SELECT COUNT(*) AS cnt, COALESCE(SUM(FLOOR(total_amount)),0) AS pts FROM orders WHERE user_id = :uid AND created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)");
+  $stmt->execute([':uid' => $userId]);
+  $wk = $stmt->fetch();
+  $weeklyOrders = (int)$wk['cnt'];
+  $weeklyPoints = (int)$wk['pts'];
+
+  // order streak: number of distinct days with orders in last 7 days
+  $stmt = $pdo->prepare("SELECT COUNT(DISTINCT DATE(created_at)) AS days FROM orders WHERE user_id = :uid AND created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)");
+  $stmt->execute([':uid' => $userId]);
+  $st = $stmt->fetch();
+  $orderStreak = $st ? (int)$st['days'] : 0;
+
+  // recent activities: recent orders and badges
+  $stmt = $pdo->prepare("SELECT total_amount, created_at, order_id FROM orders WHERE user_id = :uid ORDER BY created_at DESC LIMIT 5");
+  $stmt->execute([':uid' => $userId]);
+  $orders = $stmt->fetchAll();
+  foreach ($orders as $o) {
+    $recentActivities[] = [
+      'date' => date('Y-m-d', strtotime($o['created_at'])),
+      'title' => 'Order completed',
+      'desc' => 'Order #' . $o['order_id'] . ' - RM ' . number_format($o['total_amount'],2),
+      'points' => '+' . floor($o['total_amount']) . ' pts'
+    ];
+  }
+
+  $stmt = $pdo->prepare("SELECT b.name, ub.earned_at FROM user_badges ub JOIN badges b ON ub.badge_id = b.badge_id WHERE ub.user_id = :uid ORDER BY ub.earned_at DESC LIMIT 3");
+  $stmt->execute([':uid' => $userId]);
+  $badges = $stmt->fetchAll();
+  foreach ($badges as $b) {
+    $recentActivities[] = [
+      'date' => date('Y-m-d', strtotime($b['earned_at'])),
+      'title' => 'Badge Unlocked',
+      'desc' => $b['name'],
+      'points' => '🏅'
+    ];
+  }
+
+} catch (Exception $e) {
+  error_log('Progress fetch error: '.$e->getMessage());
+}
+
+$levels = [
+  ['name'=>'Food Beginner','icon'=>'🍽️','min'=>0,'max'=>200],
+  ['name'=>'Food Enthusiast','icon'=>'🍔','min'=>200,'max'=>400],
+  ['name'=>'Food Lover','icon'=>'❤️','min'=>400,'max'=>800],
+  ['name'=>'Chef Explorer','icon'=>'👨‍🍳','min'=>800,'max'=>1000],
+  ['name'=>'Food Master','icon'=>'🏆','min'=>1000,'max'=>999999999]
+];
+
+$payload = [
+  'userId' => $userId,
+  'points' => $points,
+  'totalPointsEarned' => $totalPointsEarned,
+  'totalOrders' => $totalOrders,
+  'totalSpent' => $total_spent,
+  'memberDays' => $memberDays,
+  'orderStreak' => $orderStreak,
+  'avgPoints' => $avgPoints,
+  'favoriteItem' => $favoriteItem,
+  'weeklyOrders' => $weeklyOrders,
+  'weeklyPoints' => $weeklyPoints,
+  'recentActivities' => $recentActivities,
+  'levels' => $levels
+];
+
+// Save as new file then will replace original
+file_put_contents(__DIR__ . '/progress_tracker_payload.json', json_encode($payload));
+
+echo "Created payload file";
